@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * 公用基类model方法
- *
  * @package App\Model
  */
 class BaseModel extends Model
@@ -18,7 +18,6 @@ class BaseModel extends Model
 
     /**
      * 取一个
-     *
      * @param $id
      * @return mixed
      */
@@ -29,18 +28,16 @@ class BaseModel extends Model
 
     /**
      * 根据条件取一个
-     *
-     * @param $where
+     * @param array $where
      * @return mixed
      */
-    public function findOne($where)
+    public function findOne(array $where, array $order)
     {
-        return $this->applyWhere($where)->applyOrder(['id' => 'desc'])->first();
+        return $this->applyWhere($where)->applyOrder($order)->first();
     }
 
     /**
      * 根据条件读取列表
-     *
      * @param array $where
      * @param int   $size
      * @param array $order
@@ -59,42 +56,43 @@ class BaseModel extends Model
 
     /**
      * 组合where参数
-     *
      * @param array $where
      * @return mixed
      */
     public function applyWhere(array $where)
     {
-        list($field, $value) = $where;
+        //例如 ['name' => ['like'=> 'sss']]
+        foreach ($where as $key => $value) {
 
-        // 如果第二个参数是字符串，则表示默认使用 = 操作符
-        if (empty($value['1'])) {
-            return $this->model->where($field, $value);
+            // 如果第二个参数是字符串，则表示默认使用 = 操作符
+            if (!is_array($value['1'])) {
+                return $this->where($key, $value);
+            }
+
+            // 第二个参数是数组
+            switch (!empty($value['0']) && strtolower($value['0'])) {
+                case 'in' :
+                    $this->model->whereIn($key, $value[1]);
+                    break;
+                case 'between' :
+                    // 例子 $where = ['age',['between',[1,10]]];
+                    $this->model->whereBetween($key, $value[1]);
+                    break;
+                case 'notbetween' :
+                    // 例子 $where = ['age',['notbetween',[1,10]]];
+                    $this->model->NotBetween($key, $value[1]);
+                    break;
+                default:
+                    $this->model->where($key, $value[0], $value[1]);
+            }
+
         }
 
-        // 第二个参数是数组
-        switch (strtolower($value['0'])) {
-            case 'in' :
-                $this->model = $this->model->whereIn($field, $value[1]);
-                break;
-            case 'between' :
-                // 例子 $where = ['age',['between',[1,10]]];
-                $this->model = $this->model->whereBetween($field, $value[1]);
-                break;
-            case 'notbetween' :
-                // 例子 $where = ['age',['notbetween',[1,10]]];
-                $this->model = $this->model->NotBetween($field, $value[1]);
-                break;
-            default:
-                $this->model = $this->model->where($field, $value[0], $value[1]);
-        }
-
-        return $this->model;
+        return $this;
     }
 
     /**
      * 组装order
-     *
      * @param array $order
      * @return mixed
      */
@@ -105,7 +103,7 @@ class BaseModel extends Model
             $this->model = $this->model->orderBy($field, $option);
         }
 
-        return $this->model;
+        return $this;
     }
 
     public function clearCache()
