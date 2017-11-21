@@ -19,6 +19,8 @@ class CreateTableUser extends Migration
             $table->string('email')->unique();
             $table->string('telephone', 15);
             $table->tinyInteger('sex')->default(0)->comment('性别，1表示男，0表示女');
+            $table->tinyInteger('status')->default(0)->comment('状态，1表示开启，0关闭');
+            $table->integer('sort')->comment('排序');
             $table->timestamps();
 
             $table->engine = 'InnoDB';
