@@ -3,28 +3,30 @@
 /**
  * 账户相关
  */
+
 namespace App\Http\Controllers\Admin;
+
+use App\Http\Requests\UserRequest;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use Validator;
 
 class AccountController extends BaseController
 {
-    public function login(Request $request)
+    protected $userObj;
+
+    public function __construct(
+        UserRepository $user
+    )
     {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'password' => 'required',
-        ],[
-            'username.required' => '用户名不能为空',
-            'password.required' => '密码不能为空',
-        ]);
+        $this->userObj = $user;
+    }
 
-        if ($validator->fails()) {
-            return $validator->errors()->first();
-        }
-
+    public function login(UserRequest $request)
+    {
         $username = $request->get('username');
         $password = $request->get('password');
+
+        $check = password_verify($password,'$2y$10$i3LUG8G/YC.5KIpBnpeyR.tteo/i.YQWsohBe0x4ZVzS.My1mkpt6');
 
     }
 
@@ -33,8 +35,12 @@ class AccountController extends BaseController
 
     }
 
-    public function register()
+    public function register(UserRequest $request)
     {
+        $username = $request->get('username');
+        $password = $request->get('password');
 
+        $password = password_hash($password,PASSWORD_DEFAULT);
+        dd($password);
     }
 }

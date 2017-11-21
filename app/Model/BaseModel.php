@@ -49,9 +49,21 @@ class BaseModel extends Model
         return $this->applyWhere($where)->applyOrder($order)->take($size)->skip($skip)->get();
     }
 
-    public function saveInfo()
+    /**
+     * 创建或者是修改
+     * @param        $saveData
+     * @param string $primayKey
+     * @return mixed 创建成功返回成功后的主键Id，修改成功返回受影响的记录行数
+     * @author: Mikey
+     */
+    public function saveInfo($saveData,$primayKey='id')
     {
-        return $this->model->save();
+        if(!empty($sveData[$primayKey])){
+            return $this->model->update($saveData);
+        }else{
+            return $this->model->insertGetId($saveData);
+        }
+
     }
 
     /**
@@ -104,6 +116,13 @@ class BaseModel extends Model
         }
 
         return $this;
+    }
+
+    public function getPageList(array $where, array $order, $pageSize = 10, $field = '*', $pageName = 'page')
+    {
+        return $this->applyWhere($where)
+            ->applyOrder($order)
+            ->paginate($pageSize, $field, $pageName);
     }
 
     public function clearCache()

@@ -22,6 +22,6 @@ class UserRepository extends BaseRepository
 
     public function getUserPageList($size)
     {
-        
+
     }
 }

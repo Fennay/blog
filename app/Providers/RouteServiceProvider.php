@@ -79,6 +79,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('/')
             ->domain(env('ADMIN_DOMAIN_URL'))
             ->namespace($this->namespace.'\Admin')
-            ->group(base_path('routes/admin.php'));
+            ->group(base_path('routes/Admin/admin.php'));
     }
 }
