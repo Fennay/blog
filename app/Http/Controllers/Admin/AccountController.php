@@ -8,10 +8,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UserRequest;
 use App\Repositories\UserRepository;
+use App\Traits\CommonResponse;
 use Illuminate\Http\Request;
+use Exception;
 
 class AccountController extends BaseController
 {
+    use CommonResponse;
     protected $userObj;
 
     public function __construct(
@@ -41,6 +44,16 @@ class AccountController extends BaseController
         $password = $request->get('password');
 
         $password = password_hash($password,PASSWORD_DEFAULT);
-        dd($password);
+        $saveData = [
+            'username' => $username,
+            'password' => $password,
+        ];
+
+        try{
+            $this->userObj->saveInfo($saveData);
+        }catch (Exception $exception){
+            return $this->ajaxError($exception->getMessage());
+        }
+        return $this->ajaxSuccess('注册成功');
     }
 }

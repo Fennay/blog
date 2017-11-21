@@ -20,6 +20,11 @@ class UserRepository extends BaseRepository
         $this->userModel = $userModel;
     }
 
+    public function saveInfo($saveData)
+    {
+        return $this->userModel->saveInfo($saveData);
+    }
+
     public function getUserPageList($size)
     {
 

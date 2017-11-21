@@ -17,6 +17,12 @@ class BaseModel extends Model
     protected $model;
 
     /**
+     * 该模型是否被自动维护时间戳
+     * @var bool
+     */
+    public $timestamps = true;
+
+    /**
      * 取一个
      * @param $id
      * @return mixed

@@ -15,7 +15,7 @@ Route::get('/login',[
     'uses' => 'AccountController@login'
 ]);
 
-Route::post('/register',[
+Route::any('/register',[
     'as' => 'register',
     'uses' => 'AccountController@register'
 ]);
