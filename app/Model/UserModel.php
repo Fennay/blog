@@ -3,10 +3,13 @@
 namespace App\Model;
 
 use DB;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
-class UserModel extends BaseModel
+class UserModel extends Authenticatable
 {
-
+    use HasRoles;
+    protected $guard_name = 'admin';
     protected $table = 'users';
 
     protected $fillable = [
