@@ -40,19 +40,22 @@ class Handler extends ExceptionHandler
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param Exception                $exception
+     * @param Exception                $e
      * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
      * @author: Mikey
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        // if ($request->ajax()) {
-        //    return $this->renderAjax($exception->errors());
-        // } else {
-        //    return response($exception->getMessage());
-        // }
+        if ($e instanceof HomeException || $e instanceof BusinessException) {
+            return $this->renderShowableException($request, $e);
+        } elseif (
+            $e instanceof HomeException
+        ) {
+            return HomeException::homeRender($request, $e);
+        }
 
-        return parent::render($request, $exception);
+
+        return parent::render($request, $e);
     }
 
     /**
@@ -63,21 +66,24 @@ class Handler extends ExceptionHandler
      */
     protected function invalidJson($request, ValidationException $exception)
     {
-        return response()->json($exception->errors(), $exception->status);
+        //return response()->json($exception->errors(), $exception->status);
+        return $this->ajaxError($exception->errors());
     }
 
     /**
-     * 如果错误是数组，则只返回第一个
-     * @param $error
-     * @return \Illuminate\Http\JsonResponse
+     * 可以显示给用户的错误信息
+     * 支持AJAX JSON返回
+     * @param           $request
+     * @param Exception $e
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
      * @author: Mikey
      */
-    protected function renderAjax($error)
+    protected function renderShowableException($request, Exception $e)
     {
-        if (is_array($error)) {
-            $error = current($error)[0];
+        if ($request->ajax()) {
+            return $this->ajaxError($e->getMessage());
+        } else {
+            return response($e->getMessage());
         }
-
-        return $this->ajaxError($error);
     }
 }

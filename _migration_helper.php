@@ -24,5 +24,6 @@ namespace Illuminate\Support;
  * @method Fluent references($value)
  * @method Fluent on($value)
  * @method Fluent comment($value)
+ * @method Fluent ->useCurrent()
  */
 class Fluent {}

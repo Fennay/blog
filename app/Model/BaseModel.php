@@ -35,9 +35,10 @@ class BaseModel extends Model
     /**
      * 根据条件取一个
      * @param array $where
+     * @param array $order
      * @return mixed
      */
-    public function findOne(array $where, array $order)
+    public function findOne(array $where, array $order = ['id' => 'desc'])
     {
         return $this->applyWhere($where)->applyOrder($order)->first();
     }
@@ -62,14 +63,16 @@ class BaseModel extends Model
      * @return mixed 创建成功返回成功后的主键Id，修改成功返回受影响的记录行数
      * @author: Mikey
      */
-    public function saveInfo($saveData,$primayKey='id')
+    public function saveInfo($saveData, $primayKey = 'id')
     {
-        if(!empty($sveData[$primayKey])){
-            return $this->model->update($saveData);
-        }else{
-            return $this->model->insertGetId($saveData);
-        }
+        //if (!empty($sveData[$primayKey])) {
+        //    return $this->model->update($saveData);
+        //} else {
+        //    return $this->model->insertGetId($saveData);
+        //}
 
+        $this->fill($saveData);
+        parent::save();
     }
 
     /**
@@ -84,7 +87,9 @@ class BaseModel extends Model
 
             // 如果第二个参数是字符串，则表示默认使用 = 操作符
             if (!is_array($value['1'])) {
-                return $this->where($key, $value);
+                $this->where($key, $value);
+
+                return $this;
             }
 
             // 第二个参数是数组

@@ -9,12 +9,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\UserRequest;
 use App\Repositories\UserRepository;
 use App\Traits\CommonResponse;
-use Illuminate\Http\Request;
 use Exception;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AccountController extends BaseController
+class AccountController extends Authenticatable
 {
     use CommonResponse;
+    use HasRoles;
     protected $userObj;
 
     public function __construct(
@@ -29,8 +31,16 @@ class AccountController extends BaseController
         $username = $request->get('username');
         $password = $request->get('password');
 
-        $check = password_verify($password,'$2y$10$i3LUG8G/YC.5KIpBnpeyR.tteo/i.YQWsohBe0x4ZVzS.My1mkpt6');
+        $userInfo = $this->userObj->getUserInfoByUserName($username);
+        if(empty($userInfo)){
+            return $this->ajaxError($username.'不存在');
+        }
 
+        if(password_verify($password,$userInfo->password)){
+            return $this->ajaxSuccess('登陆成功');
+        }
+
+        return $this->ajaxError('用户名或密码不正确');
     }
 
     public function checkLogin()
@@ -38,6 +48,12 @@ class AccountController extends BaseController
 
     }
 
+    /**
+     * 注册
+     * @param UserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author: Mikey
+     */
     public function register(UserRequest $request)
     {
         $username = $request->get('username');
