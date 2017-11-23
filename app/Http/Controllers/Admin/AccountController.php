@@ -11,6 +11,7 @@ use App\Repositories\UserRepository;
 use App\Traits\CommonResponse;
 use Exception;
 use Spatie\Permission\Traits\HasRoles;
+use App\Model\UserModel;
 
 class AccountController extends BaseController
 {
@@ -30,9 +31,16 @@ class AccountController extends BaseController
         $username = $request->get('username');
         $password = $request->get('password');
 
-        $userInfo = $this->userObj->getUserInfoByUserName($username);
+        try{
+            // $userInfo = $this->userObj->getUserInfoByUserName($username);
+            $userInfo = UserModel::where(['username' => $username])->first();
+        }catch (Exception $e){
+            return response()->json(['info' => $e->getMessage()],500);
+            // return $this->ajaxError($username.'不存在');
+        }
         if(empty($userInfo)){
-            return $this->ajaxError($username.'不存在');
+            // return $this->ajaxError($username.'不存在');
+            return response()->json(['info' => $username.'不存在','error'=>['code'=>123],'message'=>'不存在'],200);
         }
 
         if(password_verify($password,$userInfo->password)){

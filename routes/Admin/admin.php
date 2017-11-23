@@ -10,10 +10,7 @@ Route::get('/', function () {
     echo '这里是后台';
 });
 
-Route::any('/login',[
-    'as' => 'login',
-    'uses' => 'AccountController@login'
-]);
+Route::any('/login',['as' => 'login','uses' => 'AccountController@login']);
 
 Route::any('/register',[
     'as' => 'register',
