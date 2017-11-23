@@ -10,16 +10,12 @@ Route::get('/', function () {
     echo '这里是后台';
 });
 
-//Route::any('/login',[
-//    'as' => 'login',
-//    'uses' => 'AccountController@login'
-//]);
-//
-//Route::any('/register',[
-//    'as' => 'register',
-//    'uses' => 'AccountController@register'
-//]);
+Route::any('/login',[
+    'as' => 'login',
+    'uses' => 'AccountController@login'
+]);
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::any('/register',[
+    'as' => 'register',
+    'uses' => 'AccountController@register'
+]);

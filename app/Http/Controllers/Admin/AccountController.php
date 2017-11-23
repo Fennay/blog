@@ -11,9 +11,8 @@ use App\Repositories\UserRepository;
 use App\Traits\CommonResponse;
 use Exception;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AccountController extends Authenticatable
+class AccountController extends BaseController
 {
     use CommonResponse;
     use HasRoles;
