@@ -35,7 +35,7 @@ class AccountController extends BaseController
             // $userInfo = $this->userObj->getUserInfoByUserName($username);
             $userInfo = UserModel::where(['username' => $username])->first();
         }catch (Exception $e){
-            return response()->json(['info' => $e->getMessage()],500);
+            return response()->json(['info' => $e->getMessage()],200);
             // return $this->ajaxError($username.'不存在');
         }
         if(empty($userInfo)){
