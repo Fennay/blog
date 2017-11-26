@@ -9,7 +9,7 @@ import router from './router';
 
 // 1. Initialize
 const app = dva({
-  history: browserHistory(),
+  // history: browserHistory(),
 });
 
 // 2. Plugins
