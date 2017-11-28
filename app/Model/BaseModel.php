@@ -63,14 +63,8 @@ class BaseModel extends Model
      * @return mixed 创建成功返回成功后的主键Id，修改成功返回受影响的记录行数
      * @author: Mikey
      */
-    public function saveInfo($saveData, $primayKey = 'id')
+    public function saveInfo($saveData)
     {
-        //if (!empty($sveData[$primayKey])) {
-        //    return $this->model->update($saveData);
-        //} else {
-        //    return $this->model->insertGetId($saveData);
-        //}
-
         $this->fill($saveData);
         parent::save();
     }

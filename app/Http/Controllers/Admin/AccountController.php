@@ -26,7 +26,12 @@ class AccountController extends BaseController
         $this->userObj = $user;
     }
 
-    public function login(UserRequest $request)
+    public function login()
+    {
+        return view('admin.login');
+    }
+
+    public function doLogin(UserRequest $request)
     {
         $username = $request->get('username');
         $password = $request->get('password');
@@ -35,12 +40,10 @@ class AccountController extends BaseController
             // $userInfo = $this->userObj->getUserInfoByUserName($username);
             $userInfo = UserModel::where(['username' => $username])->first();
         }catch (Exception $e){
-            return response()->json(['info' => $e->getMessage()],200);
-            // return $this->ajaxError($username.'不存在');
+             return $this->ajaxError($e->getMessage());
         }
         if(empty($userInfo)){
-            // return $this->ajaxError($username.'不存在');
-            return response()->json(['info' => $username.'不存在','error'=>['code'=>123],'message'=>'不存在'],200);
+             return $this->ajaxError($username.'帐号不存在');
         }
 
         if(password_verify($password,$userInfo->password)){

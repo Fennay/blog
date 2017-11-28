@@ -54,11 +54,10 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * @param $size
      * @author: Mikey
      */
-    public function getUserPageList($size)
+    public function getUserPageList()
     {
-
+        return $this->userModel->getPageList([], ['sort' => 'desc', 'id' => 'desc'], $pageSize = 10);
     }
 }

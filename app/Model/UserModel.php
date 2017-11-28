@@ -28,6 +28,6 @@ class UserModel extends Authenticatable
     {
         parent::__construct($attributes);
 
-        $this->model = DB::table('user');
+        $this->model = DB::table($this->table);
     }
 }
