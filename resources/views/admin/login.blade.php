@@ -72,7 +72,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="login-content">
                 <h1>后台登陆</h1>
                 <p></p>
-                <form action="javascript:;" action-url="{{route('doLogin')}}" class="login-form" method="post">
+                <form action-url="{{route('doLogin')}}" class="login-form" method="post">
                     <div class="alert alert-danger display-hide">
                         <button class="close" data-close="alert"></button>
                         <span>请输入帐号名和密码. </span>
@@ -157,7 +157,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/resources/admin/assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="/resources/admin/assets/pages/scripts/login-5.js" type="text/javascript"></script>
+<script src="/resources/admin/assets/pages/js/login.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <!-- END THEME LAYOUT SCRIPTS -->

@@ -27,7 +27,7 @@
             <div class="portlet">
                 <div class="portlet-title">
                     <div class="caption">
-                        <a href="javascript:;" class="btn btn-outline btn-circle btn-sm green-haze">
+                        <a href="{{route('userAdd')}}" class="btn btn-outline btn-circle btn-sm green-haze">
                             <i class="fa fa-user-plus"></i> 添加用户 </a>
                     </div>
                     <div class="tools">
@@ -68,9 +68,13 @@
                                 </td>
                                 <td class="hidden-xs"> Mike Nilson</td>
                                 <td> 2560.60$</td>
+                                <td> 2560.60$</td>
+                                <td> 2560.60$</td>
                                 <td>
                                     <a href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">
                                         <i class="fa fa-edit"></i> Edit </a>
+                                    <a href="javascript:;" class="btn btn-outline btn-circle dark btn-sm black">
+                                        <i class="fa fa-trash-o"></i> Delete </a>
                                 </td>
                             </tr>
                             <tr>
@@ -79,6 +83,8 @@
                                     <a href="javascript:;"> Google </a>
                                 </td>
                                 <td class="hidden-xs"> Adam Larson</td>
+                                <td> 560.60$</td>
+                                <td> 560.60$</td>
                                 <td> 560.60$</td>
                                 <td>
                                     <a href="javascript:;" class="btn btn-outline btn-circle dark btn-sm black">
@@ -92,6 +98,8 @@
                                 </td>
                                 <td class="hidden-xs"> Daniel Kim</td>
                                 <td> 3460.60$</td>
+                                <td> 3460.60$</td>
+                                <td> 3460.60$</td>
                                 <td>
                                     <a href="javascript:;" class="btn btn-outline btn-circle green btn-sm purple">
                                         <i class="fa fa-edit"></i> Edit </a>
@@ -103,6 +111,8 @@
                                     <a href="javascript:;"> Microsoft </a>
                                 </td>
                                 <td class="hidden-xs"> Nick</td>
+                                <td> 2560.60$</td>
+                                <td> 2560.60$</td>
                                 <td> 2560.60$</td>
                                 <td>
                                     <a href="javascript:;" class="btn btn-outline btn-circle red btn-sm blue">

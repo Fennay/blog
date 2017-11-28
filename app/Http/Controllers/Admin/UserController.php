@@ -8,18 +8,52 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\BusinessException;
+use App\Repositories\UserRepository;
+
+use App\Http\Requests\UserRequest;
+use App\Traits\CommonResponse;
 
 class UserController extends BaseController
 {
+    use CommonResponse;
+    protected $userObj;
+
+    public function __construct(UserRepository $user)
+    {
+        $this->userObj = $user;
+    }
 
     public function index()
     {
         return view('admin.user.index');
     }
 
-    public function save()
+    public function add()
+    {
+        return view('admin.user.edit');
+    }
+
+    public function edit()
     {
 
+    }
+
+    public function del()
+    {
+
+    }
+
+    public function save(UserRequest $request)
+    {
+        $saveData = $request->all();
+        dd($saveData);
+        try {
+            $this->userObj->saveInfo($saveData);
+        } catch (BusinessException $exe) {
+            return $this->ajaxError($exe->getMessage());
+        }
+        return $this->ajaxSuccess('保存成功');
     }
 
 }

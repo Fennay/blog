@@ -33,12 +33,21 @@ class UserRepository extends BaseRepository
 
     /**
      * 保存
-     * @param $saveData
+     * @param array $data
+     * @param int $size
      * @return mixed
      * @author: Mikey
      */
-    public function saveInfo($saveData)
+    public function saveInfo(array $data, int $size)
     {
+        $saveData = [
+            'username'  => $data['username'],
+            'password'  => $data['password'],
+            'email'     => empty($data['email']) ? '' : $data['email'],
+            'telephone' => empty($data['telephone']) ? '' : $data['telephone'],
+            'sex'       => empty($data['sex']) ? 1 : $data['sex']
+        ];
+
         return $this->userModel->saveInfo($saveData);
     }
 

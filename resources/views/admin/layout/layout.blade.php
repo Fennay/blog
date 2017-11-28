@@ -205,87 +205,6 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- END NOTIFICATION DROPDOWN -->
                     <li class="separator hide"></li>
                     <!-- BEGIN INBOX DROPDOWN -->
-                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                    <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                           data-close-others="true">
-                            <i class="icon-envelope-open"></i>
-                            <span class="badge badge-danger"> 4 </span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="external">
-                                <h3>You have
-                                    <span class="bold">7 New</span> Messages</h3>
-                                <a href="app_inbox.html">view all</a>
-                            </li>
-                            <li>
-                                <ul class="dropdown-menu-list scroller" style="height: 275px;"
-                                    data-handle-color="#637283">
-                                    <li>
-                                        <a href="#">
-                                                    <span class="photo">
-                                                        <img src="/resources/admin/assets/layouts/layout3/img/avatar2.jpg"
-                                                             class="img-circle" alt=""> </span>
-                                            <span class="subject">
-                                                        <span class="from"> Lisa Wong </span>
-                                                        <span class="time">Just Now </span>
-                                                    </span>
-                                            <span class="message"> Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                                    <span class="photo">
-                                                        <img src="/resources/admin/assets/layouts/layout3/img/avatar3.jpg"
-                                                             class="img-circle" alt=""> </span>
-                                            <span class="subject">
-                                                        <span class="from"> Richard Doe </span>
-                                                        <span class="time">16 mins </span>
-                                                    </span>
-                                            <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                                    <span class="photo">
-                                                        <img src="/resources/admin/assets/layouts/layout3/img/avatar1.jpg"
-                                                             class="img-circle" alt=""> </span>
-                                            <span class="subject">
-                                                        <span class="from"> Bob Nilson </span>
-                                                        <span class="time">2 hrs </span>
-                                                    </span>
-                                            <span class="message"> Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                                    <span class="photo">
-                                                        <img src="/resources/admin/assets/layouts/layout3/img/avatar2.jpg"
-                                                             class="img-circle" alt=""> </span>
-                                            <span class="subject">
-                                                        <span class="from"> Lisa Wong </span>
-                                                        <span class="time">40 mins </span>
-                                                    </span>
-                                            <span class="message"> Vivamus sed auctor 40% nibh congue nibh... </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                                    <span class="photo">
-                                                        <img src="/resources/admin/assets/layouts/layout3/img/avatar3.jpg"
-                                                             class="img-circle" alt=""> </span>
-                                            <span class="subject">
-                                                        <span class="from"> Richard Doe </span>
-                                                        <span class="time">46 mins </span>
-                                                    </span>
-                                            <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- END INBOX DROPDOWN -->
                     <li class="separator hide"></li>
                     <!-- BEGIN TODO DROPDOWN -->
                     <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -414,47 +333,6 @@ License: You must have a valid license purchased only from themeforest(the above
                     </li>
                     <!-- END TODO DROPDOWN -->
                     <!-- BEGIN USER LOGIN DROPDOWN -->
-                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                    <li class="dropdown dropdown-user dropdown-dark">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                           data-close-others="true">
-                            <span class="username username-hide-on-mobile"> Nick </span>
-                            <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                            <img alt="" class="img-circle"
-                                 src="/resources/admin/assets/layouts/layout4/img/avatar9.jpg"/> </a>
-                        <ul class="dropdown-menu dropdown-menu-default">
-                            <li>
-                                <a href="page_user_profile_1.html">
-                                    <i class="icon-user"></i> My Profile </a>
-                            </li>
-                            <li>
-                                <a href="app_calendar.html">
-                                    <i class="icon-calendar"></i> My Calendar </a>
-                            </li>
-                            <li>
-                                <a href="app_inbox.html">
-                                    <i class="icon-envelope-open"></i> My Inbox
-                                    <span class="badge badge-danger"> 3 </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="app_todo_2.html">
-                                    <i class="icon-rocket"></i> My Tasks
-                                    <span class="badge badge-success"> 7 </span>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="page_user_lock_1.html">
-                                    <i class="icon-lock"></i> Lock Screen </a>
-                            </li>
-                            <li>
-                                <a href="page_user_login_1.html">
-                                    <i class="icon-key"></i> Log Out </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- END USER LOGIN DROPDOWN -->
                     <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                     <li class="dropdown dropdown-extended quick-sidebar-toggler">
                         <span class="sr-only">Toggle Quick Sidebar</span>
@@ -533,215 +411,11 @@ License: You must have a valid license purchased only from themeforest(the above
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active page-quick-sidebar-chat" id="quick_sidebar_tab_1">
-                    <div class="page-quick-sidebar-chat-users" data-rail-color="#ddd"
-                         data-wrapper-class="page-quick-sidebar-list">
-                        <h3 class="list-heading">Staff</h3>
-                        <ul class="media-list list-items">
-                            <li class="media">
-                                <div class="media-status">
-                                    <span class="badge badge-success">8</span>
-                                </div>
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar3.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Bob Nilson</h4>
-                                    <div class="media-heading-sub"> Project Manager</div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar1.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Nick Larson</h4>
-                                    <div class="media-heading-sub"> Art Director</div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <div class="media-status">
-                                    <span class="badge badge-danger">3</span>
-                                </div>
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar4.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Deon Hubert</h4>
-                                    <div class="media-heading-sub"> CTO</div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar2.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Ella Wong</h4>
-                                    <div class="media-heading-sub"> CEO</div>
-                                </div>
-                            </li>
-                        </ul>
-                        <h3 class="list-heading">Customers</h3>
-                        <ul class="media-list list-items">
-                            <li class="media">
-                                <div class="media-status">
-                                    <span class="badge badge-warning">2</span>
-                                </div>
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar6.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Lara Kunis</h4>
-                                    <div class="media-heading-sub"> CEO, Loop Inc</div>
-                                    <div class="media-heading-small"> Last seen 03:10 AM</div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <div class="media-status">
-                                    <span class="label label-sm label-success">new</span>
-                                </div>
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar7.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Ernie Kyllonen</h4>
-                                    <div class="media-heading-sub"> Project Manager,
-                                        <br> SmartBizz PTL
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar8.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Lisa Stone</h4>
-                                    <div class="media-heading-sub"> CTO, Keort Inc</div>
-                                    <div class="media-heading-small"> Last seen 13:10 PM</div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <div class="media-status">
-                                    <span class="badge badge-success">7</span>
-                                </div>
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar9.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Deon Portalatin</h4>
-                                    <div class="media-heading-sub"> CFO, H&D LTD</div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar10.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Irina Savikova</h4>
-                                    <div class="media-heading-sub"> CEO, Tizda Motors Inc</div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <div class="media-status">
-                                    <span class="badge badge-danger">4</span>
-                                </div>
-                                <img class="media-object" src="/resources/admin/assets/layouts/layout/img/avatar11.jpg"
-                                     alt="...">
-                                <div class="media-body">
-                                    <h4 class="media-heading">Maria Gomez</h4>
-                                    <div class="media-heading-sub"> Manager, Infomatic Inc</div>
-                                    <div class="media-heading-small"> Last seen 03:10 AM</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                     <div class="page-quick-sidebar-item">
                         <div class="page-quick-sidebar-chat-user">
                             <div class="page-quick-sidebar-nav">
                                 <a href="javascript:;" class="page-quick-sidebar-back-to-list">
                                     <i class="icon-arrow-left"></i>Back</a>
-                            </div>
-                            <div class="page-quick-sidebar-chat-user-messages">
-                                <div class="post out">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar3.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Bob Nilson</a>
-                                        <span class="datetime">20:15</span>
-                                        <span class="body"> When could you send me the report ? </span>
-                                    </div>
-                                </div>
-                                <div class="post in">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar2.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Ella Wong</a>
-                                        <span class="datetime">20:15</span>
-                                        <span class="body"> Its almost done. I will be sending it shortly </span>
-                                    </div>
-                                </div>
-                                <div class="post out">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar3.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Bob Nilson</a>
-                                        <span class="datetime">20:15</span>
-                                        <span class="body"> Alright. Thanks! :) </span>
-                                    </div>
-                                </div>
-                                <div class="post in">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar2.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Ella Wong</a>
-                                        <span class="datetime">20:16</span>
-                                        <span class="body"> You are most welcome. Sorry for the delay. </span>
-                                    </div>
-                                </div>
-                                <div class="post out">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar3.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Bob Nilson</a>
-                                        <span class="datetime">20:17</span>
-                                        <span class="body"> No probs. Just take your time :) </span>
-                                    </div>
-                                </div>
-                                <div class="post in">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar2.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Ella Wong</a>
-                                        <span class="datetime">20:40</span>
-                                        <span class="body"> Alright. I just emailed it to you. </span>
-                                    </div>
-                                </div>
-                                <div class="post out">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar3.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Bob Nilson</a>
-                                        <span class="datetime">20:17</span>
-                                        <span class="body"> Great! Thanks. Will check it right away. </span>
-                                    </div>
-                                </div>
-                                <div class="post in">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar2.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Ella Wong</a>
-                                        <span class="datetime">20:40</span>
-                                        <span class="body"> Please let me know if you have any comment. </span>
-                                    </div>
-                                </div>
-                                <div class="post out">
-                                    <img class="avatar" alt=""
-                                         src="/resources/admin/assets/layouts/layout/img/avatar3.jpg"/>
-                                    <div class="message">
-                                        <span class="arrow"></span>
-                                        <a href="javascript:;" class="name">Bob Nilson</a>
-                                        <span class="datetime">20:17</span>
-                                        <span class="body"> Sure. I will check and buzz you if anything needs to be corrected. </span>
-                                    </div>
-                                </div>
                             </div>
                             <div class="page-quick-sidebar-chat-user-form">
                                 <div class="input-group">
@@ -1169,6 +843,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/resources/admin/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="/resources/admin/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"
+        type="text/javascript"></script>
+<script src="/resources/admin/assets/global/plugins/jquery-validation/js/localization/messages_zh.js"
+        type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 @yield('page_footer')

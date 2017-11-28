@@ -19,4 +19,7 @@ Route::any('/register', [
 
 Route::group(['prefix' => '/user'], function () {
     Route::get('/', ['as' => 'userList', 'uses' => 'UserController@index']);
+    Route::get('/add', ['as' => 'userAdd', 'uses' => 'UserController@add']);
+    Route::get('/edit', ['as' => 'userEdit', 'uses' => 'UserController@edit']);
+    Route::post('/save', ['as' => 'userSave', 'uses' => 'UserController@save']);
 });

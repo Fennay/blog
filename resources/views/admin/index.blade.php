@@ -187,5 +187,5 @@
 @endsection
 
 @section('page_footer')
-    <script src="/resources/admin/assets/pages/scripts/dashboard.min.js" type="text/javascript"></script>
+    <script src="/resources/admin/assets/pages/js/dashboard.js" type="text/javascript"></script>
 @endsection
