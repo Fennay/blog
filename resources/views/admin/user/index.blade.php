@@ -62,22 +62,22 @@
                             </thead>
                             <tbody>
                             @foreach($dataList as $vo)
-                            <tr>
-                                <td class="highlight">
-                                    <div class="success"></div>
-                                    <a href="javascript:;"> {{$vo->id}} </a>
-                                </td>
-                                <td class="hidden-xs"> {{$vo->username}}</td>
-                                <td> {{$vo->email}}</td>
-                                <td> {{$vo->status}}</td>
-                                <td> {{$vo->created_at}}</td>
-                                <td>
-                                    <a href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">
-                                        <i class="fa fa-edit"></i> Edit </a>
-                                    <a href="javascript:;" class="btn btn-outline btn-circle dark btn-sm black">
-                                        <i class="fa fa-trash-o"></i> Delete </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="highlight">
+                                        <div class="{{randColor()}}"></div>
+                                        <a href="javascript:;"></a>{{$vo->id}}
+                                    </td>
+                                    <td class="hidden-xs"> {{$vo->username}}</td>
+                                    <td> @if(empty($vo->email))-@else{{$vo->email}}@endif</td>
+                                    <td> {!! getStatus($vo->status) !!}</td>
+                                    <td> {{$vo->created_at}}</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">
+                                            <i class="fa fa-edit"></i> Edit </a>
+                                        <a href="javascript:;" class="btn btn-outline btn-circle dark btn-sm black">
+                                            <i class="fa fa-trash-o"></i> Delete </a>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
