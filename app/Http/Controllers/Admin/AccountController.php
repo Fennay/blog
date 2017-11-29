@@ -21,8 +21,7 @@ class AccountController extends BaseController
 
     public function __construct(
         UserRepository $user
-    )
-    {
+    ) {
         $this->userObj = $user;
     }
 
@@ -31,19 +30,22 @@ class AccountController extends BaseController
         $username = $request->get('username');
         $password = $request->get('password');
 
-        try{
+        try {
             // $userInfo = $this->userObj->getUserInfoByUserName($username);
             $userInfo = UserModel::where(['username' => $username])->first();
-        }catch (Exception $e){
-            return response()->json(['info' => $e->getMessage()],200);
+        } catch (Exception $e) {
+            // return response()->json(['info' => $e->getMessage()],200);
+            return response($e->getMessage(), '200');
             // return $this->ajaxError($username.'不存在');
         }
-        if(empty($userInfo)){
+        if (empty($userInfo)) {
             // return $this->ajaxError($username.'不存在');
-            return response()->json(['info' => $username.'不存在','error'=>['code'=>123],'message'=>'不存在'],200);
+            // return response($username.'账户不存在','200');
+            // return response();
+            return response()->json(['error' => ['message' => $username . '账户不存在']], 422);
         }
 
-        if(password_verify($password,$userInfo->password)){
+        if (password_verify($password, $userInfo->password)) {
             return $this->ajaxSuccess('登陆成功');
         }
 
@@ -66,17 +68,18 @@ class AccountController extends BaseController
         $username = $request->get('username');
         $password = $request->get('password');
 
-        $password = password_hash($password,PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         $saveData = [
             'username' => $username,
             'password' => $password,
         ];
 
-        try{
+        try {
             $this->userObj->saveInfo($saveData);
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             return $this->ajaxError($exception->getMessage());
         }
+
         return $this->ajaxSuccess('注册成功');
     }
 }
