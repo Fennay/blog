@@ -14,7 +14,11 @@
     <!-- BEGIN PAGE BREADCRUMB -->
     <ul class="page-breadcrumb breadcrumb">
         <li>
-            <a href="index.html">Home</a>
+            <a href="/">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="{{route('userList')}}">用户管理</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
@@ -51,25 +55,31 @@
                                 <!-- BEGIN FORM-->
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action-url="{{route('userSave')}}" class="form-horizontal login-form">
-                                        <div class="alert alert-danger display-hide">
-                                            <button class="close" data-close="alert"></button>
-                                            <span>请输入帐号名和密码. </span>
-                                        </div>
+                                    <form action-url="{{route('userSave')}}" id="user-add"
+                                          class="form-horizontal user-add-form">
+                                        {{--<div class="alert alert-danger display-hide">--}}
+                                            {{--<button class="close" data-close="alert"></button>--}}
+                                            {{--<span>请输入必填字段. </span>--}}
+                                        {{--</div>--}}
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">用户名</label>
+                                                <label class="col-md-3 control-label">用户名 <span class="font-red-thunderbird">*</span></label>
                                                 <div class="col-md-4">
-                                                    <input type="text" name="username" class="form-control input-circle"
-                                                           placeholder="请输入用户名...">
+                                                    <div class="input-icon">
+                                                        <i class="fa fa-user"></i>
+                                                        <input type="text" name="username"
+                                                               class="form-control input-circle"
+                                                               placeholder="请输入用户名...">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">密码</label>
+                                                <label class="col-md-3 control-label">密码 <span class="font-red-thunderbird">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
                                                         <i class="fa fa-lock"></i>
-                                                        <input type="passpord" name="passpord" class="form-control input-circle"
+                                                        <input type="password" name="password"
+                                                               class="form-control input-circle"
                                                                placeholder="请输入密码..."></div>
                                                 </div>
                                             </div>
@@ -78,7 +88,8 @@
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
                                                         <i class="fa fa-envelope"></i>
-                                                        <input type="email" name="email" class="form-control input-circle"
+                                                        <input type="email" name="email"
+                                                               class="form-control input-circle"
                                                                placeholder="请输入邮箱..."></div>
                                                 </div>
                                             </div>
@@ -87,7 +98,8 @@
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
                                                         <i class="fa fa-phone"></i>
-                                                        <input type="text" name="telephone" class="form-control input-circle"
+                                                        <input type="text" name="telephone"
+                                                               class="form-control input-circle"
                                                                placeholder="请输入手机号...">
                                                     </div>
                                                 </div>
@@ -95,13 +107,16 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">性别</label>
                                                 <div class="col-md-4">
-                                                    <input type="checkbox" name="sex" class="make-switch" checked data-on-text="<i class='fa fa-male'></i>" data-off-text="<i class='fa fa-female'></i>">
+                                                    <input type="checkbox" name="sex" class="make-switch" checked
+                                                           data-on-text="<i class='fa fa-male'></i>"
+                                                           data-off-text="<i class='fa fa-female'></i>" value="1">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">状态</label>
                                                 <div class="col-md-4">
-                                                    <input type="checkbox" name="status" class="make-switch" checked data-on-text="启用" data-off-text="关闭">
+                                                    <input type="checkbox" name="status" class="make-switch" checked
+                                                           data-on-text="启用" data-off-text="关闭" value="1">
                                                 </div>
                                             </div>
                                         </div>
@@ -127,5 +142,5 @@
 @endsection
 
 @section('page_footer')
-<script src="/resources/admin/assets/pages/js/user.js" type="text/javascript"></script>
+    <script src="/resources/admin/assets/pages/js/user.js" type="text/javascript"></script>
 @endsection

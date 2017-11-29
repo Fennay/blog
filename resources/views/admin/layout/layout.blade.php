@@ -782,6 +782,23 @@ License: You must have a valid license purchased only from themeforest(the above
 </div>
 <!-- END FOOTER -->
 <!-- BEGIN QUICK NAV -->
+<!-- 提示弹框 -->
+<div class="modal fade bs-modal-sm info" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">提示语</h4>
+            </div>
+            <div class="modal-body"> <i class="glyphicon glyphicon-ok"></i>这里是提示信息 </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
 <!-- END QUICK NAV -->
 <!--[if lt IE 9]>
@@ -800,53 +817,13 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="/resources/admin/assets/global/plugins/moment.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js"
+<script src="/resources/admin/assets/global/plugins/jquery-validation/js/jquery.validate.js"
         type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/amcharts/themes/patterns.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/horizontal-timeline/horizontal-timeline.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js"
+<script src="/resources/admin/assets/global/plugins/jquery-validation/js/localization/messages_zh.js"
         type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/resources/admin/assets/global/scripts/app.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"
-        type="text/javascript"></script>
-<script src="/resources/admin/assets/global/plugins/jquery-validation/js/localization/messages_zh.js"
-        type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 @yield('page_footer')

@@ -34,15 +34,14 @@ class UserRepository extends BaseRepository
     /**
      * 保存
      * @param array $data
-     * @param int $size
      * @return mixed
      * @author: Mikey
      */
-    public function saveInfo(array $data, int $size)
+    public function saveInfo(array $data)
     {
         $saveData = [
             'username'  => $data['username'],
-            'password'  => $data['password'],
+            'password'  => password_hash($data['password'],PASSWORD_DEFAULT),
             'email'     => empty($data['email']) ? '' : $data['email'],
             'telephone' => empty($data['telephone']) ? '' : $data['telephone'],
             'sex'       => empty($data['sex']) ? 1 : $data['sex']
@@ -67,6 +66,6 @@ class UserRepository extends BaseRepository
      */
     public function getUserPageList()
     {
-        return $this->userModel->getPageList([], ['sort' => 'desc', 'id' => 'desc'], $pageSize = 10);
+        return $this->userModel->getPageList([], $pageSize = 10, ['sort' => 'desc', 'id' => 'desc']);
     }
 }

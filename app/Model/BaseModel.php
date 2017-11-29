@@ -59,7 +59,6 @@ class BaseModel extends Model
     /**
      * 创建或者是修改
      * @param        $saveData
-     * @param string $primayKey
      * @return mixed 创建成功返回成功后的主键Id，修改成功返回受影响的记录行数
      * @author: Mikey
      */
@@ -76,33 +75,36 @@ class BaseModel extends Model
      */
     public function applyWhere(array $where)
     {
-        //例如 ['name' => ['like'=> 'sss']]
-        foreach ($where as $key => $value) {
+        if (!empty($where)) {
 
-            // 如果第二个参数是字符串，则表示默认使用 = 操作符
-            if (!is_array($value['1'])) {
-                $this->where($key, $value);
+            //例如 ['name' => ['like'=> 'sss']]
+            foreach ($where as $key => $value) {
 
-                return $this;
+                // 如果第二个参数是字符串，则表示默认使用 = 操作符
+                if (!is_array($value['1'])) {
+                    $this->where($key, $value);
+
+                    return $this;
+                }
+
+                // 第二个参数是数组
+                switch (!empty($value['0']) && strtolower($value['0'])) {
+                    case 'in' :
+                        $this->model->whereIn($key, $value[1]);
+                        break;
+                    case 'between' :
+                        // 例子 $where = ['age',['between',[1,10]]];
+                        $this->model->whereBetween($key, $value[1]);
+                        break;
+                    case 'notbetween' :
+                        // 例子 $where = ['age',['notbetween',[1,10]]];
+                        $this->model->NotBetween($key, $value[1]);
+                        break;
+                    default:
+                        $this->model->where($key, $value[0], $value[1]);
+                }
+
             }
-
-            // 第二个参数是数组
-            switch (!empty($value['0']) && strtolower($value['0'])) {
-                case 'in' :
-                    $this->model->whereIn($key, $value[1]);
-                    break;
-                case 'between' :
-                    // 例子 $where = ['age',['between',[1,10]]];
-                    $this->model->whereBetween($key, $value[1]);
-                    break;
-                case 'notbetween' :
-                    // 例子 $where = ['age',['notbetween',[1,10]]];
-                    $this->model->NotBetween($key, $value[1]);
-                    break;
-                default:
-                    $this->model->where($key, $value[0], $value[1]);
-            }
-
         }
 
         return $this;
@@ -123,11 +125,12 @@ class BaseModel extends Model
         return $this;
     }
 
-    public function getPageList(array $where, array $order, $pageSize = 10, $field = '*', $pageName = 'page')
+    public function getPageList(array $where, $pageSize = 10, array $order, $field = '*', $pageName = 'page')
     {
-        return $this->applyWhere($where)
-            ->applyOrder($order)
-            ->paginate($pageSize, $field, $pageName);
+
+        $this->applyWhere($where)->applyOrder($order);
+
+        return $this->paginate($pageSize, $field, $pageName);
     }
 
     public function clearCache()

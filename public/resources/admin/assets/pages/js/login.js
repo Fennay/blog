@@ -54,11 +54,20 @@ var Login = function () {
                     data:data,
                     dataType: "json",
                     success: function (j) {
+                        var html = ' <i class="glyphicon glyphicon-ok"></i> ' + j.info;
                         if ('success' === j.status) {
-                            alert('登陆成功');
+                            $('.info .modal-body').html(html);
+                            $('.info').modal('show');
+                            setTimeout(function () {
+                                if(null !== j.data.url){
+                                    window.location.href = j.data.url;
+                                }
+                            },3000);
                         } else {
-                            alert(j.info || '用户名或密码不正确');
+                            $('.info .modal-body').html(html);
+                            $('.info').modal('show')
                         }
+
                     }
                 });
             }

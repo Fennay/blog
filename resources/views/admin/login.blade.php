@@ -128,6 +128,23 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
 </div>
+<!-- 提示弹框 -->
+<div class="modal fade bs-modal-sm info" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">提示语</h4>
+            </div>
+            <div class="modal-body"> <i class="glyphicon glyphicon-ok"></i>这里是提示信息 </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <!-- END : LOGIN PAGE 5-1 -->
 <!--[if lt IE 9]>
 <script src="/resources/admin/assets/global/plugins/respond.min.js"></script>

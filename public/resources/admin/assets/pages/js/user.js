@@ -2,7 +2,7 @@ var Login = function () {
 
     var handleLogin = function () {
 
-        $('.login-form').validate({
+        $('#user-add').validate({
             errorElement: 'span', //default input error message container
             errorClass: 'help-block', // default input error message class
             focusInvalid: false, // do not focus the last invalid input
@@ -11,14 +11,15 @@ var Login = function () {
                     required: true
                 },
                 password: {
-                    required: true
+                    required: true,
+                    rangelength: [6, 50]
                 },
                 remember: {
                     required: false
                 },
                 email: {
                     required: false,
-                    email:true
+                    email: true
                 },
                 telephone: {
                     required: false,
@@ -27,7 +28,7 @@ var Login = function () {
             },
 
             invalidHandler: function (event, validator) { //display error alert on form submit
-                $('.alert-danger', $('.login-form')).show();
+                $('.alert-danger', $('.user-add-form')).show();
             },
 
             highlight: function (element) { // hightlight error inputs
@@ -50,44 +51,53 @@ var Login = function () {
                 $.ajax({
                     type: "post",
                     url: url,
-                    data:data,
+                    data: data,
                     dataType: "json",
                     success: function (j) {
+                        var html = ' <i class="glyphicon glyphicon-ok"></i> ' + j.info;
                         if ('success' === j.status) {
-                            alert('登陆成功');
+                            $('.info .modal-body').html(html);
+                            $('.info').modal('show');
+                            setTimeout(function () {
+                                if(null !== j.data.url){
+                                    window.location.href = j.data.url;
+                                }
+                            },3000);
+
                         } else {
-                            alert(j.info || '用户名或密码不正确');
+                            $('.info .modal-body').html(html);
+                            $('.info').modal('show')
                         }
                     }
                 });
             }
         });
 
-         $('.login-form input').keypress(function(e) {
-             if (e.which == 13) {
-                 if ($('.login-form').validate().form()) {
-                     $('.login-form').submit(); //form validation success, call ajax form submit
-                 }
-                 return false;
-             }
-         });
+        $('.user-add-form input').keypress(function (e) {
+            if (e.which == 13) {
+                if ($('.user-add-form').validate().form()) {
+                    $('.user-add-form').submit(); //form validation success, call ajax form submit
+                }
+                return false;
+            }
+        });
 
-         $('.forget-form input').keypress(function(e) {
-             if (e.which == 13) {
-                 if ($('.forget-form').validate().form()) {
-                     $('.forget-form').submit();
-                 }
-                 return false;
-             }
-         });
+        $('.forget-form input').keypress(function (e) {
+            if (e.which == 13) {
+                if ($('.forget-form').validate().form()) {
+                    $('.forget-form').submit();
+                }
+                return false;
+            }
+        });
 
         $('#forget-password').click(function () {
-            $('.login-form').hide();
+            $('.user-add-form').hide();
             $('.forget-form').show();
         });
 
         $('#back-btn').click(function () {
-            $('.login-form').show();
+            $('.user-add-form').show();
             $('.forget-form').hide();
         });
     }

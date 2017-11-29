@@ -10,8 +10,10 @@ use App\Http\Requests\UserRequest;
 use App\Repositories\UserRepository;
 use App\Traits\CommonResponse;
 use Exception;
+use Illuminate\Http\Request;
 use Spatie\Permission\Traits\HasRoles;
 use App\Model\UserModel;
+use Validator;
 
 class AccountController extends BaseController
 {
@@ -31,13 +33,21 @@ class AccountController extends BaseController
         return view('admin.login');
     }
 
-    public function doLogin(UserRequest $request)
+    public function doLogin(Request $request)
     {
+        $validate = Validator::make($request->all(),[
+            'username'  => 'required',
+            'password'  => 'required|between:6,50',
+        ]);
+
+        if($validate->fails()){
+            return $this->ajaxError($validate->errors()->first());
+        }
+
         $username = $request->get('username');
         $password = $request->get('password');
 
         try{
-            // $userInfo = $this->userObj->getUserInfoByUserName($username);
             $userInfo = UserModel::where(['username' => $username])->first();
         }catch (Exception $e){
              return $this->ajaxError($e->getMessage());
@@ -47,7 +57,7 @@ class AccountController extends BaseController
         }
 
         if(password_verify($password,$userInfo->password)){
-            return $this->ajaxSuccess('登陆成功');
+            return $this->ajaxSuccess('登陆成功',['url' => route('admin.index')]);
         }
 
         return $this->ajaxError('用户名或密码不正确');

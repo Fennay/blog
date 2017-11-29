@@ -61,15 +61,16 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($dataList as $vo)
                             <tr>
                                 <td class="highlight">
                                     <div class="success"></div>
-                                    <a href="javascript:;"> RedBull </a>
+                                    <a href="javascript:;"> {{$vo->id}} </a>
                                 </td>
-                                <td class="hidden-xs"> Mike Nilson</td>
-                                <td> 2560.60$</td>
-                                <td> 2560.60$</td>
-                                <td> 2560.60$</td>
+                                <td class="hidden-xs"> {{$vo->username}}</td>
+                                <td> {{$vo->email}}</td>
+                                <td> {{$vo->status}}</td>
+                                <td> {{$vo->created_at}}</td>
                                 <td>
                                     <a href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">
                                         <i class="fa fa-edit"></i> Edit </a>
@@ -77,48 +78,7 @@
                                         <i class="fa fa-trash-o"></i> Delete </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="highlight">
-                                    <div class="info"></div>
-                                    <a href="javascript:;"> Google </a>
-                                </td>
-                                <td class="hidden-xs"> Adam Larson</td>
-                                <td> 560.60$</td>
-                                <td> 560.60$</td>
-                                <td> 560.60$</td>
-                                <td>
-                                    <a href="javascript:;" class="btn btn-outline btn-circle dark btn-sm black">
-                                        <i class="fa fa-trash-o"></i> Delete </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="highlight">
-                                    <div class="success"></div>
-                                    <a href="javascript:;"> Apple </a>
-                                </td>
-                                <td class="hidden-xs"> Daniel Kim</td>
-                                <td> 3460.60$</td>
-                                <td> 3460.60$</td>
-                                <td> 3460.60$</td>
-                                <td>
-                                    <a href="javascript:;" class="btn btn-outline btn-circle green btn-sm purple">
-                                        <i class="fa fa-edit"></i> Edit </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="highlight">
-                                    <div class="warning"></div>
-                                    <a href="javascript:;"> Microsoft </a>
-                                </td>
-                                <td class="hidden-xs"> Nick</td>
-                                <td> 2560.60$</td>
-                                <td> 2560.60$</td>
-                                <td> 2560.60$</td>
-                                <td>
-                                    <a href="javascript:;" class="btn btn-outline btn-circle red btn-sm blue">
-                                        <i class="fa fa-share"></i> Share </a>
-                                </td>
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -26,7 +26,9 @@ class UserController extends BaseController
 
     public function index()
     {
-        return view('admin.user.index');
+        $dataList = $this->userObj->getUserPageList();
+
+        return view('admin.user.index', ['dataList' => $dataList]);
     }
 
     public function add()
@@ -47,13 +49,14 @@ class UserController extends BaseController
     public function save(UserRequest $request)
     {
         $saveData = $request->all();
-        dd($saveData);
+
         try {
             $this->userObj->saveInfo($saveData);
         } catch (BusinessException $exe) {
             return $this->ajaxError($exe->getMessage());
         }
-        return $this->ajaxSuccess('保存成功');
+
+        return $this->ajaxSuccess('保存成功', ['url' => route('userList')]);
     }
 
 }
