@@ -59,15 +59,14 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * 将验证异常转换成 JSON 响应
+     * 将验证异常转换成 JSON 响应 多个错误信息，取第一个
      * @param  \Illuminate\Http\Request                   $request
      * @param  \Illuminate\Validation\ValidationException $exception
      * @return \Illuminate\Http\JsonResponse
      */
     protected function invalidJson($request, ValidationException $exception)
     {
-        //return response()->json($exception->errors(), $exception->status);
-        return $this->ajaxError($exception->errors());
+        return $this->ajaxError(current($exception->errors()));
     }
 
     /**

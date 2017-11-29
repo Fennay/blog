@@ -5,8 +5,9 @@ namespace App\Model;
 use DB;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Eloquent;
 
-class UserModel extends Authenticatable
+class UserModel extends Eloquent
 {
     use HasRoles;
     protected $guard_name = 'admin';
@@ -27,7 +28,5 @@ class UserModel extends Authenticatable
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-
-        $this->model = DB::table('user');
     }
 }

@@ -33,12 +33,20 @@ class UserRepository extends BaseRepository
 
     /**
      * 保存
-     * @param $saveData
+     * @param array $data
      * @return mixed
      * @author: Mikey
      */
-    public function saveInfo($saveData)
+    public function saveInfo(array $data)
     {
+        $saveData = [
+            'username'  => $data['username'],
+            'password'  => password_hash($data['password'],PASSWORD_DEFAULT),
+            'email'     => empty($data['email']) ? '' : $data['email'],
+            'telephone' => empty($data['telephone']) ? '' : $data['telephone'],
+            'sex'       => empty($data['sex']) ? 1 : $data['sex']
+        ];
+
         return $this->userModel->saveInfo($saveData);
     }
 
@@ -54,11 +62,10 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * @param $size
      * @author: Mikey
      */
-    public function getUserPageList($size)
+    public function getUserPageList()
     {
-
+        return $this->userModel->getPageList([], $pageSize = 10, ['sort' => 'desc', 'id' => 'desc']);
     }
 }

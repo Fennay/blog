@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.21 on 2017-11-20.
+ * Generated for Laravel 5.5.22 on 2017-11-29.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -10629,6 +10629,35 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Create a streamed response for a given file.
+         *
+         * @param string $path
+         * @param string|null $name
+         * @param array|null $headers
+         * @param string|null $disposition
+         * @return \Symfony\Component\HttpFoundation\StreamedResponse 
+         * @static 
+         */ 
+        public static function response($path, $name = null, $headers = array(), $disposition = 'inline')
+        {
+            return \Illuminate\Filesystem\FilesystemAdapter::response($path, $name, $headers, $disposition);
+        }
+        
+        /**
+         * Create a streamed download response for a given file.
+         *
+         * @param string $path
+         * @param string|null $name
+         * @param array|null $headers
+         * @return \Symfony\Component\HttpFoundation\StreamedResponse 
+         * @static 
+         */ 
+        public static function download($path, $name = null, $headers = array())
+        {
+            return \Illuminate\Filesystem\FilesystemAdapter::download($path, $name, $headers);
+        }
+        
+        /**
          * Write the contents of a file.
          *
          * @param string $path
@@ -10845,7 +10874,7 @@ namespace Illuminate\Support\Facades {
          * @param \League\Flysystem\Rackspace\RackspaceAdapter $adapter
          * @param string $path
          * @param \DateTimeInterface $expiration
-         * @param $options
+         * @param array $options
          * @return string 
          * @static 
          */ 
@@ -14269,6 +14298,112 @@ namespace  {
             public static function macroCall($method, $parameters)
             {    
                 return \Illuminate\Database\Query\Builder::macroCall($method, $parameters);
+            }
+         
+            /**
+             * 
+             *
+             * @static 
+             */ 
+            public static function setHelperModel($model)
+            {    
+                return \Fennay\ModelHelper\HelperQueryBuilder::setHelperModel($model);
+            }
+         
+            /**
+             * 根据ID获取一条数据
+             *
+             * @param array $where
+             * @param array $orderBy
+             * @return mixed 
+             * @author : Mikey
+             * @static 
+             */ 
+            public static function findOne($where, $orderBy = array())
+            {    
+                return \Fennay\ModelHelper\HelperQueryBuilder::findOne($where, $orderBy);
+            }
+         
+            /**
+             * 根据ID获取一条数据
+             *
+             * @param $id
+             * @return mixed 
+             * @author : Mikey
+             * @static 
+             */ 
+            public static function getOne($id)
+            {    
+                return \Fennay\ModelHelper\HelperQueryBuilder::getOne($id);
+            }
+         
+            /**
+             * 根据条件读取列表
+             *
+             * @param array $where
+             * @param int $size
+             * @param array $order
+             * @param int $skip
+             * @return mixed 
+             * @static 
+             */ 
+            public static function getList($where, $size = null, $order = array(), $skip = null)
+            {    
+                return \Fennay\ModelHelper\HelperQueryBuilder::getList($where, $size, $order, $skip);
+            }
+         
+            /**
+             * 获取分页数据
+             *
+             * @param array $where
+             * @param int $pageSize
+             * @param array $order
+             * @param string $field
+             * @param string $pageName
+             * @return mixed 
+             * @author : Mikey
+             * @static 
+             */ 
+            public static function getPageList($where, $pageSize, $order, $field = '*', $pageName = 'page')
+            {    
+                return \Fennay\ModelHelper\HelperQueryBuilder::getPageList($where, $pageSize, $order, $field, $pageName);
+            }
+         
+            /**
+             * 创建或者是修改
+             *
+             * @param $saveData
+             * @return mixed 创建成功返回成功后的主键Id，修改成功返回受影响的记录行数
+             * @author : Mikey
+             * @static 
+             */ 
+            public static function saveInfo($saveData)
+            {    
+                return \Fennay\ModelHelper\HelperQueryBuilder::saveInfo($saveData);
+            }
+         
+            /**
+             * 组合where参数
+             *
+             * @param array $where
+             * @return mixed 
+             * @static 
+             */ 
+            public static function applyWhere($where)
+            {    
+                return \Fennay\ModelHelper\HelperQueryBuilder::applyWhere($where);
+            }
+         
+            /**
+             * 组装order
+             *
+             * @param array $order
+             * @return mixed 
+             * @static 
+             */ 
+            public static function applyOrder($order)
+            {    
+                return \Fennay\ModelHelper\HelperQueryBuilder::applyOrder($order);
             }
         }
 
