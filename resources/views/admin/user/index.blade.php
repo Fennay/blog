@@ -72,7 +72,7 @@
                                     <td> {!! getStatus($vo->status) !!}</td>
                                     <td> {{$vo->created_at}}</td>
                                     <td>
-                                        <a href="javascript:;" class="btn btn-outline btn-circle btn-sm purple">
+                                        <a href="{{route('userEdit',['id' => $vo->id])}}" class="btn btn-outline btn-circle btn-sm purple">
                                             <i class="fa fa-edit"></i> Edit </a>
                                         <a href="javascript:;" class="btn btn-outline btn-circle dark btn-sm black">
                                             <i class="fa fa-trash-o"></i> Delete </a>

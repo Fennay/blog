@@ -25,10 +25,10 @@ class UserRequest extends FormRequest
     {
         $rules = [
             'username'  => 'required',
-            'password'  => 'required|between:6,50',
+            'password'  => 'nullable|between:6,50',
             'email'     => 'nullable|email',
-            //'telephone' => 'regex:/^1[3|4|5|7|8][0-9]{9}$/',
-            //'sex'       => 'in:1,0',
+            'telephone' => 'nullable|regex:/^1[3|4|5|7|8][0-9]{9}$/',
+            'sex'       => 'in:1,0',
         ];
         $id = $request->get('id');
         // 如果编辑则不验证唯一性

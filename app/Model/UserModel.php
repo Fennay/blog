@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Eloquent;
@@ -10,6 +11,7 @@ use Eloquent;
 class UserModel extends Eloquent
 {
     use HasRoles;
+    use SoftDeletes;
     protected $guard_name = 'admin';
     protected $table = 'users';
 

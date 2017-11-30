@@ -1,17 +1,13 @@
 @extends('admin.layout.layout')
 
 @section('content')
-    <!-- BEGIN PAGE HEAD-->
     <div class="page-head">
-        <!-- BEGIN PAGE TITLE -->
         <div class="page-title">
-            <h1>Form Layouts
-                <small>form layouts</small>
+            <h1>Blog后台管理系统
+                <small>Every Thing Will Be Ok!</small>
             </h1>
         </div>
     </div>
-    <!-- END PAGE HEAD-->
-    <!-- BEGIN PAGE BREADCRUMB -->
     <ul class="page-breadcrumb breadcrumb">
         <li>
             <a href="/">Home</a>
@@ -22,11 +18,9 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span class="active">Form Stuff</span>
+            <span class="active">编辑用户</span>
         </li>
     </ul>
-    <!-- END PAGE BREADCRUMB -->
-    <!-- BEGIN PAGE BASE CONTENT -->
     <div class="row">
         <div class="col-md-12">
             <div class="tabbable-line boxless tabbable-reversed">
@@ -35,9 +29,9 @@
                         <div class="portlet light bordered">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="icon-equalizer font-red-sunglo"></i>
-                                    <span class="caption-subject font-red-sunglo bold uppercase">Form Sample</span>
-                                    <span class="caption-helper">form actions on top...</span>
+                                    <i class="icon-user font-red-sunglo"></i>
+                                    <span class="caption-subject font-red-sunglo bold uppercase">用户管理</span>
+                                    {{--<span class="caption-helper">编辑用户 ...</span>--}}
                                 </div>
                                 <div class="actions">
                                     <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
@@ -52,29 +46,27 @@
                                 </div>
                             </div>
                             <div class="portlet-body form">
-                                <!-- BEGIN FORM-->
                                 <div class="portlet-body form">
-                                    <!-- BEGIN FORM-->
                                     <form action-url="{{route('userSave')}}" id="user-add"
                                           class="form-horizontal user-add-form">
-                                        {{--<div class="alert alert-danger display-hide">--}}
-                                            {{--<button class="close" data-close="alert"></button>--}}
-                                            {{--<span>请输入必填字段. </span>--}}
-                                        {{--</div>--}}
+                                        @if(!empty($dataInfo->id))<input type="hidden" name="id"
+                                                                     value="{{$dataInfo->id}}">@endif
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">用户名 <span class="font-red-thunderbird">*</span></label>
+                                                <label class="col-md-3 control-label">用户名 <span
+                                                            class="font-red-thunderbird">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
                                                         <i class="fa fa-user"></i>
                                                         <input type="text" name="username"
                                                                class="form-control input-circle"
-                                                               placeholder="请输入用户名...">
+                                                               placeholder="请输入用户名..." @if(!empty($dataInfo->username))value="{{$dataInfo->username}}"@endif>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">密码 <span class="font-red-thunderbird">*</span></label>
+                                                <label class="col-md-3 control-label">密码 <span
+                                                            class="font-red-thunderbird">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
                                                         <i class="fa fa-lock"></i>
@@ -90,7 +82,8 @@
                                                         <i class="fa fa-envelope"></i>
                                                         <input type="email" name="email"
                                                                class="form-control input-circle"
-                                                               placeholder="请输入邮箱..."></div>
+                                                               placeholder="请输入邮箱..." @if(!empty($dataInfo->email))value="{{$dataInfo->email}}"@endif>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -100,14 +93,15 @@
                                                         <i class="fa fa-phone"></i>
                                                         <input type="text" name="telephone"
                                                                class="form-control input-circle"
-                                                               placeholder="请输入手机号...">
+                                                               placeholder="请输入手机号..." @if(!empty($dataInfo->telephone))value="{{$dataInfo->telephone}}"@endif>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">性别</label>
                                                 <div class="col-md-4">
-                                                    <input type="checkbox" name="sex" class="make-switch" checked
+                                                    <input type="checkbox" name="sex" class="make-switch"
+                                                           @if(empty($dataInfo->sex) || 0 == $dataInfo->sex) checked @endif
                                                            data-on-text="<i class='fa fa-male'></i>"
                                                            data-off-text="<i class='fa fa-female'></i>" value="1">
                                                 </div>
@@ -115,7 +109,8 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">状态</label>
                                                 <div class="col-md-4">
-                                                    <input type="checkbox" name="status" class="make-switch" checked
+                                                    <input type="checkbox" name="status" class="make-switch"
+                                                           @if(empty($dataInfo->status) || 0 == $dataInfo->status) checked @endif
                                                            data-on-text="启用" data-off-text="关闭" value="1">
                                                 </div>
                                             </div>

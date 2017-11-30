@@ -11,7 +11,6 @@ var Login = function () {
                     required: true
                 },
                 password: {
-                    required: true,
                     rangelength: [6, 50]
                 },
                 remember: {

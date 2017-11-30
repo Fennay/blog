@@ -40,14 +40,31 @@ class UserRepository extends BaseRepository
     public function saveInfo(array $data)
     {
         $saveData = [
+            'id'        => empty($data['id']) ? '' : $data['id'],
             'username'  => $data['username'],
-            'password'  => password_hash($data['password'],PASSWORD_DEFAULT),
             'email'     => empty($data['email']) ? '' : $data['email'],
             'telephone' => empty($data['telephone']) ? '' : $data['telephone'],
             'sex'       => empty($data['sex']) ? 1 : $data['sex']
         ];
 
+        // 密码不为空，则进行加密
+        // 修改信息是，密码可为空，表示不修改密码
+        if (!empty($data['password'])) {
+            $saveData['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        }
+
         return $this->userModel->saveInfo($saveData);
+    }
+
+    /**
+     * 删除
+     * @param $uid
+     * @return mixed
+     * @author: Mikey
+     */
+    public function delUserByUid($uid)
+    {
+        return $this->userModel->del($uid);
     }
 
     /**
@@ -62,6 +79,18 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * 通过uid获取用户信息
+     * @param $uid
+     * @return mixed
+     * @author: Mikey
+     */
+    public function getUserInfoByUid($uid)
+    {
+        return $this->userModel->getOne($uid);
+    }
+
+    /**
+     * 获取分页数据
      * @author: Mikey
      */
     public function getUserPageList()
