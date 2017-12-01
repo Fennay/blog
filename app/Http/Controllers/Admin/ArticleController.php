@@ -18,7 +18,7 @@ class ArticleController extends BaseController
 
     public function index()
     {
-
+        return view('admin.article.index');
     }
 
     public function add()

@@ -7,7 +7,9 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\HomeException;
 use App\Model\UserModel;
+use Illuminate\Database\QueryException;
 
 /**
  * Class UserRepository
@@ -35,6 +37,7 @@ class UserRepository extends BaseRepository
      * 保存
      * @param array $data
      * @return mixed
+     * @throws HomeException
      * @author: Mikey
      */
     public function saveInfo(array $data)
@@ -47,13 +50,25 @@ class UserRepository extends BaseRepository
             'sex'       => empty($data['sex']) ? 1 : $data['sex']
         ];
 
-        // 密码不为空，则进行加密
-        // 修改信息是，密码可为空，表示不修改密码
-        if (!empty($data['password'])) {
+        // 添加时，密码可不填，默认为 123456
+        // 编辑时，密码也可不填，不填则不修改，填了表示修改密码
+        if (empty($data['id'])) {
+            $data['password'] = empty($data['password']) ? 123456 : $data['password'];
             $saveData['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+            // 添加数据时，设置排序值等于ID本身
+            $lastUid = $this->userModel->findOne([]);
+            $lastUid = empty($lastUid->id) ? 0 : $lastUid->id;
+            $saveData['sort'] = $lastUid + 1;
+        } else {
+            !empty($saveData['password']) && $saveData['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         }
 
-        return $this->userModel->saveInfo($saveData);
+        try {
+            return $this->userModel->saveInfo($saveData);
+        } catch (QueryException $exe) {
+            throw new HomeException('数据保存失败');
+        }
     }
 
     /**
@@ -91,10 +106,12 @@ class UserRepository extends BaseRepository
 
     /**
      * 获取分页数据
+     * @param $pageSize
+     * @return mixed
      * @author: Mikey
      */
-    public function getUserPageList()
+    public function getUserPageList($pageSize = 10)
     {
-        return $this->userModel->getPageList([], $pageSize = 10, ['sort' => 'desc', 'id' => 'desc']);
+        return $this->userModel->getPageList([], $pageSize, ['sort' => 'desc', 'id' => 'desc']);
     }
 }

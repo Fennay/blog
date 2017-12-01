@@ -53,20 +53,7 @@ var Login = function () {
                     data: data,
                     dataType: "json",
                     success: function (j) {
-                        var html = ' <i class="glyphicon glyphicon-ok"></i> ' + j.info;
-                        if ('success' === j.status) {
-                            $('.info .modal-body').html(html);
-                            $('.info').modal('show');
-                            setTimeout(function () {
-                                if(null !== j.data.url){
-                                    window.location.href = j.data.url;
-                                }
-                            },3000);
-
-                        } else {
-                            $('.info .modal-body').html(html);
-                            $('.info').modal('show')
-                        }
+                        info(j);
                     }
                 });
             }
@@ -90,15 +77,6 @@ var Login = function () {
             }
         });
 
-        $('#forget-password').click(function () {
-            $('.user-add-form').hide();
-            $('.forget-form').show();
-        });
-
-        $('#back-btn').click(function () {
-            $('.user-add-form').show();
-            $('.forget-form').hide();
-        });
     }
 
 

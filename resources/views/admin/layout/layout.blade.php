@@ -800,6 +800,25 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- /.modal-dialog -->
 </div>
 
+<!-- 确认弹框 -->
+<div class="modal fade bs-modal-sm confirm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">你确定吗？</h4>
+            </div>
+            <div class="modal-body"> <i class="glyphicon glyphicon-exclamation-sign"></i> 确认吗？ </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn dark btn-outline confirm-sure" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <!-- END QUICK NAV -->
 <!--[if lt IE 9]>
 <script src="/resources/admin/assets/global/plugins/respond.min.js"></script>
@@ -824,6 +843,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/resources/admin/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="/resources/admin/assets/pages/js/common.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 @yield('page_footer')

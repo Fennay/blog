@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
     public function rules(Request $request)
     {
         $rules = [
-            'username'  => 'required',
+            'username'  => 'required|unique:users',
             'password'  => 'nullable|between:6,50',
             'email'     => 'nullable|email',
             'telephone' => 'nullable|regex:/^1[3|4|5|7|8][0-9]{9}$/',

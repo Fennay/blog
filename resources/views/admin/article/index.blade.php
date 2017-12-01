@@ -66,7 +66,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $dataList->render() !!}
+                        <div class="row">{!! $dataList->render() !!}</div>
                     </div>
                 </div>
             </div>
