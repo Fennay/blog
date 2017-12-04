@@ -47,7 +47,8 @@ class UserRepository extends BaseRepository
             'username'  => $data['username'],
             'email'     => empty($data['email']) ? '' : $data['email'],
             'telephone' => empty($data['telephone']) ? '' : $data['telephone'],
-            'sex'       => empty($data['sex']) ? 1 : $data['sex']
+            'sex'       => empty($data['sex']) ? 0 : $data['sex'],
+            'status'    => empty($data['status']) ? 0 : $data['status']
         ];
 
         // 添加时，密码可不填，默认为 123456

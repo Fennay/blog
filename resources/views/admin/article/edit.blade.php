@@ -1,5 +1,11 @@
 @extends('admin.layout.layout')
 
+@section('page_header')
+    <link href="/resources/admin/assets/pages/plugin/editor_md/editormd.css" rel="stylesheet">
+    <link href="/resources/admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet"
+          type="text/css"/>
+@endsection
+
 @section('content')
     <div class="page-head">
         <div class="page-title">
@@ -14,11 +20,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{{route('userList')}}">用户管理</a>
+            <a href="{{route('articleList')}}">文章管理</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span class="active">@if(!empty($dataInfo->id))编辑@else添加@endif用户</span>
+            <span class="active">@if(!empty($dataInfo->id))编辑@else添加@endif文章</span>
         </li>
     </ul>
     <div class="row">
@@ -29,9 +35,8 @@
                         <div class="portlet light bordered">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="icon-user font-red-sunglo"></i>
-                                    <span class="caption-subject font-red-sunglo bold uppercase">用户管理</span>
-                                    {{--<span class="caption-helper">编辑用户 ...</span>--}}
+                                    <i class="icon-article font-red-sunglo"></i>
+                                    <span class="caption-subject font-red-sunglo bold uppercase">文章管理</span>
                                 </div>
                                 <div class="actions">
                                     <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
@@ -47,67 +52,67 @@
                             </div>
                             <div class="portlet-body form">
                                 <div class="portlet-body form">
-                                    <form action-url="{{route('userSave')}}" id="user-add"
-                                          class="form-horizontal user-add-form">
+                                    <form action-url="{{route('articleSave')}}" id="article-add"
+                                          class="form-horizontal article-add-form" enctype="multipart/form-data">
                                         @if(!empty($dataInfo->id))<input type="hidden" name="id"
                                                                          value="{{$dataInfo->id}}">@endif
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">用户名 <span
+                                                <label class="col-md-3 control-label">文章名称 <span
                                                             class="font-red-thunderbird">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
-                                                        <i class="fa fa-user"></i>
-                                                        <input type="text" name="username"
+                                                        <i class="fa fa-article"></i>
+                                                        <input type="text" name="title"
                                                                class="form-control input-circle"
-                                                               placeholder="请输入用户名..."
-                                                               @if(!empty($dataInfo->username))value="{{$dataInfo->username}}"@endif>
+                                                               placeholder="请输入文章名称..."
+                                                               @if(!empty($dataInfo->title))value="{{$dataInfo->title}}"@endif>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">密码 <span
-                                                            class="font-red-thunderbird">*</span></label>
+                                                <label class="col-md-3 control-label">副标题</label>
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
                                                         <i class="fa fa-lock"></i>
-                                                        <input type="password" name="password"
+                                                        <input type="text" name="subhead"
                                                                class="form-control input-circle"
-                                                               placeholder="请输入密码..."></div>
+                                                               placeholder="请输入副标题..."></div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">邮箱</label>
-                                                <div class="col-md-4">
-                                                    <div class="input-icon">
-                                                        <i class="fa fa-envelope"></i>
-                                                        <input type="email" name="email"
-                                                               class="form-control input-circle"
-                                                               placeholder="请输入邮箱..."
-                                                               @if(!empty($dataInfo->email))value="{{$dataInfo->email}}"@endif>
+                                            <div class="form-group ">
+                                                <label class="control-label col-md-3">缩略图</label>
+                                                <div class="col-md-9">
+                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                        <div class="fileinput-preview thumbnail"
+                                                             data-trigger="fileinput"
+                                                             style="width: 200px; height: 150px;"></div>
+                                                        <div>
+                                                            <span class="btn red btn-outline btn-file">
+                                                                <span class="fileinput-new"> 选择 </span>
+                                                                <span class="fileinput-exists"> 修改 </span>
+                                                                <input type="file" id="uploadFile" name="file"> </span>
+                                                            <a href="javascript:;" class="btn red fileinput-exists"
+                                                               data-dismiss="fileinput"> 删除 </a>
+                                                            <a href="javascript:;" id="upload"
+                                                               class="btn red fileinput-exists" onclick="uploadImage()"> 上传 </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">手机号</label>
+                                                <label class="col-md-3 control-label">描述</label>
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
-                                                        <i class="fa fa-phone"></i>
-                                                        <input type="text" name="telephone"
-                                                               class="form-control input-circle"
-                                                               placeholder="请输入手机号..."
-                                                               @if(!empty($dataInfo->telephone))value="{{$dataInfo->telephone}}"@endif>
+                                                        <textarea name="" class="form-control input-circle" cols="30"
+                                                                  rows="10"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">性别</label>
-                                                <div class="col-md-4">
-                                                    <input type="checkbox" name="sex" class="make-switch"
-                                                           @if(empty($dataInfo->sex) || 1 == $dataInfo->sex) checked
-                                                           @endif
-                                                           data-on-text="<i class='fa fa-male'></i>"
-                                                           data-off-text="<i class='fa fa-female'></i>" value="1">
+                                                <label class="control-label col-md-3">内容</label>
+                                                <div class="col-md-12" id="editormd">
+                                                    <textarea style="display: none" name="content"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -142,5 +147,20 @@
 @endsection
 
 @section('page_footer')
-    <script src="/resources/admin/assets/pages/js/user.js" type="text/javascript"></script>
+    <script src="/resources/admin/assets/pages/js/article.js" type="text/javascript"></script>
+    <script src="/resources/admin/assets/pages/plugin/editor_md/editormd.min.js" type="text/javascript"></script>
+    <script src="/resources/admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+        var editor;
+
+        $(function () {
+            editor = editormd({
+                id: "editormd",
+                width: "70%",
+                height: 540,
+                path: "/resources/admin/assets/pages/plugin/editor_md/lib/"
+            });
+        });
+    </script>
 @endsection

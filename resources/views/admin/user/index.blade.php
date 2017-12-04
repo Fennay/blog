@@ -10,7 +10,7 @@
     </div>
     <ul class="page-breadcrumb breadcrumb">
         <li>
-            <a href="index.html">Home</a>
+            <a href="/">Home</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
@@ -59,7 +59,7 @@
                                     <td>
                                         <a href="{{route('userEdit',['id' => $vo->id])}}" class="btn btn-outline btn-circle btn-sm purple">
                                             <i class="fa fa-edit"></i> Edit </a>
-                                        <a href="javascript:;" onclick='userDel({{$vo->id}})' class="btn btn-outline btn-circle dark btn-sm black delete">
+                                        <a href="javascript:;" onclick='deleteAlert("{{route('userDel',['id' => $vo->id])}}")' class="btn btn-outline btn-circle dark btn-sm black delete">
                                             <i class="fa fa-trash-o"></i> Delete </a>
                                     </td>
                                 </tr>
@@ -75,24 +75,5 @@
 @endsection
 
 @section('page_footer')
-    <script type="text/javascript">
-        function userDel(id) {
-            var html = '<i class="glyphicon glyphicon-exclamation-sign"></i> 确定要删除吗？ ';
-            $('.confirm .modal-body').html(html);
-            $('.confirm').modal('show');
-            $('.confirm .confirm-sure').click(function () {
-                $.ajax({
-                    type:"delete",
-                    url:"{{route('userDel',['id' => ''])}}/" + id,
-                    dataType:"json",
-                    success:function (j) {
-                        info(j);
-                        setTimeout(function () {
-                            window.location.reload();
-                        },3000);
-                    }
-                });
-            });
-        }
-    </script>
+
 @endsection

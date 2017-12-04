@@ -104,7 +104,7 @@
                                                 <label class="control-label col-md-3">性别</label>
                                                 <div class="col-md-4">
                                                     <input type="checkbox" name="sex" class="make-switch"
-                                                           @if(empty($dataInfo->sex) || 1 == $dataInfo->sex) checked
+                                                           @if(!isset($dataInfo->sex) || 1 == $dataInfo->sex) checked
                                                            @endif
                                                            data-on-text="<i class='fa fa-male'></i>"
                                                            data-off-text="<i class='fa fa-female'></i>" value="1">
@@ -114,7 +114,7 @@
                                                 <label class="control-label col-md-3">状态</label>
                                                 <div class="col-md-4">
                                                     <input type="checkbox" name="status" class="make-switch"
-                                                           @if(empty($dataInfo->status) || 1 == $dataInfo->status) checked
+                                                           @if(!isset($dataInfo->status) || 1 == $dataInfo->status) checked
                                                            @endif
                                                            data-on-text="启用" data-off-text="关闭" value="1">
                                                 </div>

@@ -44,17 +44,29 @@ class ArticleRepository extends BaseRepository
      */
     public function getArticleInfoByArticleId($articleId)
     {
-        return  $this->articleModel->getOne($articleId);
+        return $this->articleModel->getOne($articleId);
     }
 
     /**
      * 获取文章分页列表【后台】
+     * @param int $pageSize
      * @return mixed
      * @author: Mikey
      */
-    public function getAdminArticlePageList()
+    public function getAdminArticlePageList($pageSize = 10)
     {
-        return $this->articleModel->getPageList([], ['sort' => 'desc', 'id' => 'desc'], $pageSize = 10);
+        return $this->articleModel->getPageList([], $pageSize, ['sort' => 'desc', 'id' => 'desc']);
+    }
+
+    /**
+     * 删除
+     * @param $aid
+     * @return mixed
+     * @author: Mikey
+     */
+    public function delArticleByUid($aid)
+    {
+        return $this->articleModel->del($aid);
     }
 
 }

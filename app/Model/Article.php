@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 
-class Article extends BaseModel
+class Article extends Eloquent
 {
     protected $table = 'article';
 
@@ -26,8 +26,6 @@ class Article extends BaseModel
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-
-        $this->model = DB::table($this->table);
     }
 
     public function content()

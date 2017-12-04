@@ -42,6 +42,7 @@ License: You must have a valid license purchased only from themeforest(the above
           type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/resources/admin/assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
     @yield('page_header')
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
@@ -840,13 +841,14 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
 <script src="/resources/admin/assets/global/plugins/jquery-validation/js/localization/messages_zh.js"
         type="text/javascript"></script>
+<script src="/resources/admin/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/resources/admin/assets/global/scripts/app.min.js" type="text/javascript"></script>
-<script src="/resources/admin/assets/pages/js/common.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 @yield('page_footer')
+<script src="/resources/admin/assets/pages/js/common.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="/resources/admin/assets/layouts/layout4/scripts/layout.min.js" type="text/javascript"></script>

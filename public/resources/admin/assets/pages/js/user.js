@@ -53,7 +53,8 @@ var Login = function () {
                     data: data,
                     dataType: "json",
                     success: function (j) {
-                        info(j);
+                        // info(j);
+                        msg(j);
                     }
                 });
             }

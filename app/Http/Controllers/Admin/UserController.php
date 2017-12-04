@@ -43,7 +43,7 @@ class UserController extends BaseController
      */
     public function index()
     {
-        $dataList = $this->userObj->getUserPageList(2);
+        $dataList = $this->userObj->getUserPageList(10);
 
         return view('admin.user.index', ['dataList' => $dataList]);
     }
