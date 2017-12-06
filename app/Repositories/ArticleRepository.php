@@ -9,31 +9,84 @@ namespace App\Repositories;
 
 use App\Exceptions\BusinessException;
 use App\Model\Article;
+use App\Model\ArticleContent;
 use Exception;
+use DB;
 
 class ArticleRepository extends BaseRepository
 {
     protected $articleModel;
+    protected $articleContentModel;
 
-    public function __construct(Article $article)
+    public function __construct(
+        Article $article,
+        ArticleContent $articleContent
+    )
     {
         $this->articleModel = $article;
+        $this->articleContentModel = $articleContent;
     }
 
     /**
      * 保存数据
-     * @param $saveInfo
+     * @param array $data
      * @return mixed
      * @throws BusinessException
      * @author: Mikey
      */
-    public function saveInfo($saveInfo)
+    public function saveInfo(array $data)
     {
+        DB::beginTransaction();
+        // 存储文章基本内容
         try {
-            return $this->articleModel->saveInfo($saveInfo);
+            $saveInfo = [
+                'title'     => $data['title'],
+                'subhead'   => empty($data['subhead']) ? '' : $data['subhead'],
+                'desc'      => empty($data['desc']) ? '' : $data['desc'],
+                'img_url'   => empty($data['img_url']) ? '' : $data['img_url'],
+                'author'    => empty($data['author']) ? '' : $data['author'],
+                'author_id' => empty($data['author_id']) ? 0 : $data['author_id'],
+                'tag_id'    => empty($data['tag_id']) ? '' : $data['tag_id'],
+                'status'    => empty($data['status']) ? 0 : $data['status']
+            ];
+            if(empty($data['id'])){
+                $aid = $this->articleModel->insertGetId($saveInfo);
+            }else{
+                $aid = $data['id'];
+                $saveInfo['id'] = $aid;
+                $this->articleModel->saveInfo($saveInfo);
+            }
+
         } catch (Exception $e) {
+            DB::rollBack();
             throw new BusinessException($e->getMessage());
         }
+
+        // 添加数据时，设置排序值等于Id
+        if (empty($data['id'])) {
+            try {
+                $this->articleModel->saveInfo(['id' => $aid, 'sort' => $aid]);
+            } catch (Exception $e) {
+                DB::rollBack();
+                throw new BusinessException($e->getMessage());
+            }
+        }
+
+        // 保存内容
+        try {
+            $saveContent = [
+                'id'      => empty($data['content_id']) ? '' : $data['content_id'],
+                'aid'     => $aid,
+                'content' => empty($data['content']) ? '' : $data['content']
+            ];
+            $this->articleContentModel->saveInfo($saveContent);
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new BusinessException($e->getMessage());
+        }
+
+        // 提交事务
+        DB::commit();
     }
 
     /**

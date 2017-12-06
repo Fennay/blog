@@ -8,21 +8,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\ArticleRepository;
+use App\Services\UploadService;
 use App\Traits\CommonResponse;
 use App\Http\Requests\ArticleRequest;
+use App\Exceptions\HomeException;
 
 class ArticleController extends BaseController
 {
     use CommonResponse;
     protected $articleObj;
+    protected $uploadService;
 
     public function __construct(
-        ArticleRepository $article
+        ArticleRepository $article,
+        UploadService $uploadService
     )
     {
         $this->articleObj = $article;
+        $this->uploadService = $uploadService;
     }
 
+    /**
+     * 列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author: Mikey
+     */
     public function index()
     {
         $dataList = $this->articleObj->getAdminArticlePageList();
@@ -30,17 +40,35 @@ class ArticleController extends BaseController
         return view('admin.article.index', ['dataList' => $dataList]);
     }
 
+    /**
+     * 添加
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author: Mikey
+     */
     public function add()
     {
-        return view('admin.article.edit',['dataInfo' => collect()]);
+        return view('admin.article.edit', ['dataInfo' => collect()]);
     }
 
-    public function edit()
+    /**
+     * 编辑
+     * @param $aid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author: Mikey
+     */
+    public function edit($aid)
     {
-        return view('admin.article.edit',['dataInfo' => collect()]);
+        $dataInfo = $this->articleObj->getArticleInfoByArticleId($aid);
 
+        return view('admin.article.edit', ['dataInfo' => $dataInfo]);
     }
 
+    /**
+     * 删除
+     * @param $aid
+     * @return \Illuminate\Http\JsonResponse
+     * @author: Mikey
+     */
     public function del($aid)
     {
         try {
@@ -49,7 +77,7 @@ class ArticleController extends BaseController
             return $this->ajaxError('删除失败');
         }
 
-        return $this->ajaxSuccess('删除成功');
+        return $this->ajaxSuccess('删除成功', ['url' => route('articleList')]);
     }
 
     /**
@@ -70,18 +98,24 @@ class ArticleController extends BaseController
 
     }
 
+    /**
+     * 保存
+     * @param ArticleRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author: Mikey
+     */
     public function save(ArticleRequest $request)
     {
         $saveData = $request->all();
-        p($request->file());
-        p($saveData);die;
+
+        !empty($saveData['img_url']) && $saveData['img_url'] = $this->uploadService->uploadSave($saveData['img_url']);
         try {
-            $this->userObj->saveInfo($saveData);
-        } catch (BusinessException $exe) {
+            $this->articleObj->saveInfo($saveData);
+        } catch (HomeException $exe) {
             return $this->ajaxError($exe->getMessage());
         }
-
-        return $this->ajaxSuccess('保存成功', ['url' => route('userList')]);
+pd(12312313);
+        return $this->ajaxSuccess('保存成功', ['url' => route('articleList')]);
     }
 
 

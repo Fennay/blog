@@ -18,16 +18,16 @@ function info(j) {
 
 
 function msg(j) {
-    var status = j.status || 'error';
-    var info = j.info || '系统错误';
-    var url = j.data.url || '';
+    var status = j.status || 'error',
+        info = j.info || '系统错误',
+        url = j.data.url || '';
     swal({
         title: info,
         type: status,
         allowOutsideClick: true,
         timer: 3000,
     });
-    if (null !== url) {
+    if ('' !== url) {
         setTimeout(function () {
             window.location.href = url;
         }, 3000);
@@ -45,21 +45,29 @@ function deleteAlert(url) {
         },
         function () {
             $.ajax({
-                type:"delete",
-                url:url,
-                dataType:"json",
-                success:function (j) {
+                type: "delete",
+                url: url,
+                dataType: "json",
+                success: function (j) {
                     msg(j);
                 }
             });
         });
 }
 
-function uploadImage() {
+/**
+ * 上传图片
+ * @returns {boolean}
+ */
+function uploadImage(uploadFile,imgUrl) {
     var url = "/upload",
         data = new FormData,
-        files = $('#uploadFile').prop('files');
-    data.append('thumb', files[0]);
+        upload = $('#' + uploadFile),
+        files = upload.prop('files');
+    data.append('file', files[0]);
+    if ('' === upload.val()) {
+        return false;
+    }
     $.ajax({
         type: "post",
         url: url,
@@ -68,6 +76,8 @@ function uploadImage() {
         processData: false,
         contentType: false,
         success: function (j) {
+            $('#' + uploadFile).val("");
+            $('#' + imgUrl).val(j.data.img_url);
             msg(j);
         }
     });

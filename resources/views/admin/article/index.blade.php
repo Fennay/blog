@@ -38,10 +38,11 @@
                             <thead>
                             <tr>
                                 <th><i class="fa fa-briefcase"></i> 编号</th>
-                                <th class="hidden-xs"><i class="fa fa-article"></i> 文章名</th>
-                                <th><i class="fa fa-envelope"></i> 邮箱</th>
-                                <th><i class="fa fa-shopping-cart"></i> 状态</th>
-                                <th><i class="fa fa-shopping-calendar"></i> 创建时间</th>
+                                <th class="hidden-xs"><i class="fa fa-smail-o"></i> 文章名</th>
+                                <th>副标题</th>
+                                <th width="140">图片地址</th>
+                                <th>状态</th>
+                                <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -52,8 +53,9 @@
                                         <div class="{{randColor()}}"></div>
                                         <a href="javascript:;"></a>{{$vo->id}}
                                     </td>
-                                    <td class="hidden-xs"> {{$vo->articlename}}</td>
-                                    <td> @if(empty($vo->email))-@else{{$vo->email}}@endif</td>
+                                    <td class="hidden-xs"> {{$vo->title}}</td>
+                                    <td>@if(empty($vo->subhead))-@else{{$vo->subhead}}@endif</td>
+                                    <td>@if(!empty($vo->img_url))<img src="{{asset(env('RESOURCE_URL_PREFIX').$vo->img_url)}}" width="120" height="80" alt="111111111">@else - @endif</td>
                                     <td> {!! getStatus($vo->status) !!}</td>
                                     <td> {{$vo->created_at}}</td>
                                     <td>

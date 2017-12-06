@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.22 on 2017-11-30.
+ * Generated for Laravel 5.5.22 on 2017-12-06.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -14377,8 +14377,11 @@ namespace Fennay\ModelHelper {
         }
         
         /**
-         * 
+         * 删除
          *
+         * @param $id
+         * @return mixed 
+         * @author : Mikey
          * @static 
          */ 
         public static function del($id)
@@ -14409,6 +14412,14 @@ namespace Fennay\ModelHelper {
         {
             return \Fennay\ModelHelper\HelperQueryBuilder::applyOrder($order);
         }
+         
+    }
+ 
+}
+
+namespace App\Services { 
+
+    class Linker {
          
     }
  
@@ -14480,6 +14491,8 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
 
     class View extends \Illuminate\Support\Facades\View {}
+
+    class Linker extends \App\Services\Linker {}
  
 }
 

@@ -10,7 +10,7 @@ Route::get('/login', ['as' => 'login', 'uses' => 'AccountController@login']);
 Route::post('/doLogin', ['as' => 'doLogin', 'uses' => 'AccountController@doLogin']);
 Route::any('/register', ['as'   => 'register','uses' => 'AccountController@register']);
 // 上传图片
-Route::post('/upload',['as' => 'upload','uses' =>'PublicController@upload']);
+Route::any('/upload',['as' => 'upload','uses' =>'PublicController@upload']);
 
 // 首页
 Route::get('/', ['as' => 'admin.index', 'uses' => 'IndexController@index']);

@@ -62,7 +62,7 @@
                                                             class="font-red-thunderbird">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
-                                                        <i class="fa fa-article"></i>
+                                                        <i class="fa fa-smile-o"></i>
                                                         <input type="text" name="title"
                                                                class="form-control input-circle"
                                                                placeholder="请输入文章名称..."
@@ -77,7 +77,9 @@
                                                         <i class="fa fa-lock"></i>
                                                         <input type="text" name="subhead"
                                                                class="form-control input-circle"
-                                                               placeholder="请输入副标题..."></div>
+                                                               placeholder="请输入副标题..."
+                                                               @if(!empty($dataInfo->subhead))value="{{$dataInfo->subhead}}"@endif>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
@@ -86,16 +88,28 @@
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                                         <div class="fileinput-preview thumbnail"
                                                              data-trigger="fileinput"
-                                                             style="width: 200px; height: 150px;"></div>
+                                                             style="width: 200px; height: 150px;">
+                                                            @if(!empty($dataInfo->img_url))
+                                                                <img src="{{asset(env('RESOURCE_URL_PREFIX').$dataInfo->img_url)}}">
+                                                            @endif
+                                                        </div>
                                                         <div>
                                                             <span class="btn red btn-outline btn-file">
                                                                 <span class="fileinput-new"> 选择 </span>
                                                                 <span class="fileinput-exists"> 修改 </span>
                                                                 <input type="file" id="uploadFile" name="file"> </span>
-                                                            <a href="javascript:;" class="btn red fileinput-exists"
+                                                            <a href="javascript:;" id="uploadDelete"
+                                                               class="btn red fileinput-exists"
                                                                data-dismiss="fileinput"> 删除 </a>
-                                                            <a href="javascript:;" id="upload"
-                                                               class="btn red fileinput-exists" onclick="uploadImage()"> 上传 </a>
+                                                            <a href="javascript:;" id="uploadDo"
+                                                               class="btn green fileinput-exists"
+                                                               onclick="uploadImage('uploadFile','img_url')">
+                                                                上传 </a>
+                                                            @if(!empty($dataInfo->img_url))
+                                                                <input type="hidden" id="img_url" name="img_url" value="{{$dataInfo->img_url}}">
+                                                                @else
+                                                                <input type="hidden" id="img_url" name="img_url" value="">
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -103,16 +117,18 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">描述</label>
                                                 <div class="col-md-4">
-                                                    <div class="input-icon">
-                                                        <textarea name="" class="form-control input-circle" cols="30"
-                                                                  rows="10"></textarea>
+                                                    <div class="input-group">
+                                                        <textarea name="desc" class="form-control input-circle"
+                                                                  cols="80"
+                                                                  rows="10">@if(!empty($dataInfo->desc)){{$dataInfo->desc}}@endif</textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">内容</label>
                                                 <div class="col-md-12" id="editormd">
-                                                    <textarea style="display: none" name="content"></textarea>
+                                                    <textarea style="display: none" name="content">@if(!empty($dataInfo->content)){{$dataInfo->content->content}}@endif</textarea>
+                                                    <input type="hidden" name="content_id" value=@if(!empty($dataInfo->content)){{$dataInfo->content->id}}@endif>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -152,14 +168,17 @@
     <script src="/resources/admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
             type="text/javascript"></script>
     <script type="text/javascript">
+        // markdown 编辑器
         var editor;
-
         $(function () {
             editor = editormd({
                 id: "editormd",
                 width: "70%",
                 height: 540,
-                path: "/resources/admin/assets/pages/plugin/editor_md/lib/"
+                path: "/resources/admin/assets/pages/plugin/editor_md/lib/",
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png"],
+                imageUploadURL: "{{route('upload')}}" + '?type=editor',
             });
         });
     </script>

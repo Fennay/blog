@@ -3,16 +3,18 @@
 namespace App\Model;
 
 use Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Eloquent
 {
+    use SoftDeletes;
     protected $table = 'article';
 
     protected $fillable = [
         'title',
         'subhead',
         'desc',
-        'thumb',
+        'img_url',
         'author',
         'author_id',
         'tag_id',

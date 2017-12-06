@@ -14,6 +14,7 @@ class CreateTableArticleContent extends Migration
     public function up()
     {
         Schema::create('article_content', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('aid')->comment('文章Id');
             $table->text('content')->comment('文章内容');
 
