@@ -17,7 +17,7 @@ class CreateTableArticleContent extends Migration
             $table->increments('id');
             $table->integer('aid')->comment('文章Id');
             $table->text('content')->comment('文章内容');
-
+            $table->timestamps();
             $table->engine = 'InnoDB';
         });
     }

@@ -50,13 +50,14 @@ class ArticleRepository extends BaseRepository
                 'status'    => empty($data['status']) ? 0 : $data['status']
             ];
             if(empty($data['id'])){
+                DB::enableQueryLog();
                 $aid = $this->articleModel->insertGetId($saveInfo);
+                pd(DB::getQueryLog());
             }else{
                 $aid = $data['id'];
                 $saveInfo['id'] = $aid;
                 $this->articleModel->saveInfo($saveInfo);
             }
-
         } catch (Exception $e) {
             DB::rollBack();
             throw new BusinessException($e->getMessage());

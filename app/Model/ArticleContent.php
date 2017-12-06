@@ -9,9 +9,10 @@ class ArticleContent extends Eloquent
     protected $table = 'article_content';
 
     protected $fillable = [
-        'id',
         'aid',
-        'content'
+        'content',
+        'created_at',
+        'updated_at',
     ];
 
     public $timestamps = false;

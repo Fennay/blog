@@ -114,7 +114,7 @@ class ArticleController extends BaseController
         } catch (HomeException $exe) {
             return $this->ajaxError($exe->getMessage());
         }
-pd(12312313);
+
         return $this->ajaxSuccess('保存成功', ['url' => route('articleList')]);
     }
 
