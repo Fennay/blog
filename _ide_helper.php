@@ -12786,6 +12786,18 @@ namespace Fennay\ModelHelper {
         }
         
         /**
+         * Set a model instance for the model being queried.
+         *
+         * @param \Illuminate\Database\Eloquent\Model $model
+         * @return $this 
+         * @static 
+         */ 
+        public static function setModel($model)
+        {
+            return \Illuminate\Database\Eloquent\Builder::setModel($model);
+        }
+        
+        /**
          * Get the given macro by name.
          *
          * @param string $name
@@ -14417,14 +14429,6 @@ namespace Fennay\ModelHelper {
  
 }
 
-namespace App\Services { 
-
-    class Linker {
-         
-    }
- 
-}
-
 
 namespace  { 
 
@@ -14491,8 +14495,6 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
 
     class View extends \Illuminate\Support\Facades\View {}
-
-    class Linker extends \App\Services\Linker {}
  
 }
 

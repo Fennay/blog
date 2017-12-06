@@ -8,8 +8,8 @@
 namespace App\Repositories;
 
 use App\Exceptions\BusinessException;
-use App\Model\Article;
-use App\Model\ArticleContent;
+use App\Model\ArticleModel;
+use App\Model\ArticleContentModel;
 use Exception;
 use DB;
 
@@ -19,10 +19,9 @@ class ArticleRepository extends BaseRepository
     protected $articleContentModel;
 
     public function __construct(
-        Article $article,
-        ArticleContent $articleContent
-    )
-    {
+        ArticleModel $article,
+        ArticleContentModel $articleContent
+    ) {
         $this->articleModel = $article;
         $this->articleContentModel = $articleContent;
     }
@@ -40,6 +39,7 @@ class ArticleRepository extends BaseRepository
         // 存储文章基本内容
         try {
             $saveInfo = [
+                'id'        => empty($data['title']) ? '' : $data['id'],
                 'title'     => $data['title'],
                 'subhead'   => empty($data['subhead']) ? '' : $data['subhead'],
                 'desc'      => empty($data['desc']) ? '' : $data['desc'],
@@ -49,15 +49,8 @@ class ArticleRepository extends BaseRepository
                 'tag_id'    => empty($data['tag_id']) ? '' : $data['tag_id'],
                 'status'    => empty($data['status']) ? 0 : $data['status']
             ];
-            if(empty($data['id'])){
-                DB::enableQueryLog();
-                $aid = $this->articleModel->insertGetId($saveInfo);
-                pd(DB::getQueryLog());
-            }else{
-                $aid = $data['id'];
-                $saveInfo['id'] = $aid;
-                $this->articleModel->saveInfo($saveInfo);
-            }
+            $this->articleModel->saveInfo($saveInfo);
+            $aid = $this->articleModel->id;
         } catch (Exception $e) {
             DB::rollBack();
             throw new BusinessException($e->getMessage());

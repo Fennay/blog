@@ -5,7 +5,7 @@ namespace App\Model;
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Article extends Eloquent
+class ArticleModel extends Eloquent
 {
     use SoftDeletes;
     protected $table = 'article';
@@ -32,6 +32,6 @@ class Article extends Eloquent
 
     public function content()
     {
-        return $this->hasOne('App\Model\ArticleContent', 'aid', 'id');
+        return $this->hasOne('App\Model\ArticleContentModel', 'aid', 'id');
     }
 }

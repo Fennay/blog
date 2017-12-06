@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Eloquent;
 
-class ArticleContent extends Eloquent
+class ArticleContentModel extends Eloquent
 {
     protected $table = 'article_content';
 
@@ -14,8 +14,6 @@ class ArticleContent extends Eloquent
         'created_at',
         'updated_at',
     ];
-
-    public $timestamps = false;
 
     public function __construct(array $attributes = [])
     {
