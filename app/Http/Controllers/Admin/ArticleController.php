@@ -8,10 +8,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\ArticleRepository;
+use App\Services\BaiDuFanYiService;
 use App\Services\UploadService;
 use App\Traits\CommonResponse;
 use App\Http\Requests\ArticleRequest;
 use App\Exceptions\HomeException;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
+use GuzzleHttp\Psr7;
 
 class ArticleController extends BaseController
 {
@@ -118,5 +122,19 @@ class ArticleController extends BaseController
         return $this->ajaxSuccess('保存成功', ['url' => route('articleList')]);
     }
 
+    /**
+     * 转换名称为英文
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author: Mikey
+     */
+    public function getArticleUrl(Request $request)
+    {
+        $title = $request->get('title');
+        $baiduFanyi = new BaiDuFanYiService(env('BAIDU_FANYI_APP_ID'), env('BAIDU_FANYI_APP_KEY'), env('BAIDU_FANYI_URL'));
+        $res = $baiduFanyi->run($title);
+
+        return $this->ajaxSuccess('获取成功', ['articleUrl' => $res]);
+    }
 
 }

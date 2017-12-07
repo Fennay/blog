@@ -55,7 +55,7 @@
                                     </td>
                                     <td class="hidden-xs"> {{$vo->title}}</td>
                                     <td>@if(empty($vo->subhead))-@else{{$vo->subhead}}@endif</td>
-                                    <td>@if(!empty($vo->img_url))<img src="{{asset(env('RESOURCE_URL_PREFIX').$vo->img_url)}}" width="120" height="80" alt="111111111">@else - @endif</td>
+                                    <td>@if(!empty($vo->img_url))<img src="{{asset(env('RESOURCE_URL_PREFIX').$vo->img_url)}}" width="120" height="80">@else - @endif</td>
                                     <td> {!! getStatus($vo->status) !!}</td>
                                     <td> {{$vo->created_at}}</td>
                                     <td>

@@ -4,6 +4,9 @@
     <link href="/resources/admin/assets/pages/plugin/editor_md/editormd.css" rel="stylesheet">
     <link href="/resources/admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet"
           type="text/css"/>
+    <link href="/resources/admin/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/resources/admin/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet"
+          type="text/css"/>
 @endsection
 
 @section('content')
@@ -71,6 +74,19 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-md-3 control-label">文章地址 <span
+                                                            class="font-red-thunderbird">*</span></label>
+                                                <div class="col-md-4">
+                                                    <div class="input-icon">
+                                                        <i class="fa fa-smile-o"></i>
+                                                        <input type="text" name="url"
+                                                               class="form-control input-circle"
+                                                               placeholder="文章访问地址..."
+                                                               @if(!empty($dataInfo->url))value="{{$dataInfo->url}}"@endif>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-md-3 control-label">副标题</label>
                                                 <div class="col-md-4">
                                                     <div class="input-icon">
@@ -80,6 +96,16 @@
                                                                placeholder="请输入副标题..."
                                                                @if(!empty($dataInfo->subhead))value="{{$dataInfo->subhead}}"@endif>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="multiple" class="col-md-3 control-label">请选择标签</label>
+                                                <div class="col-md-4">
+                                                    <select id="multiple" class="form-control select2 input-circle"
+                                                            multiple="multiple" name="tags[]">
+                                                        <option value="AK">Alaska</option>
+                                                        <option value="HI">Hawaii</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
@@ -106,9 +132,11 @@
                                                                onclick="uploadImage('uploadFile','img_url')">
                                                                 上传 </a>
                                                             @if(!empty($dataInfo->img_url))
-                                                                <input type="hidden" id="img_url" name="img_url" value="{{$dataInfo->img_url}}">
-                                                                @else
-                                                                <input type="hidden" id="img_url" name="img_url" value="">
+                                                                <input type="hidden" id="img_url" name="img_url"
+                                                                       value="{{$dataInfo->img_url}}">
+                                                            @else
+                                                                <input type="hidden" id="img_url" name="img_url"
+                                                                       value="">
                                                             @endif
                                                         </div>
                                                     </div>
@@ -127,8 +155,10 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">内容</label>
                                                 <div class="col-md-12" id="editormd">
-                                                    <textarea style="display: none" name="content">@if(!empty($dataInfo->content)){{$dataInfo->content->content}}@endif</textarea>
-                                                    <input type="hidden" name="content_id" value=@if(!empty($dataInfo->content)){{$dataInfo->content->id}}@endif>
+                                                    <textarea style="display: none"
+                                                              name="content">@if(!empty($dataInfo->content)){{$dataInfo->content->content}}@endif</textarea>
+                                                    <input type="hidden" name="content_id"
+                                                           value=@if(!empty($dataInfo->content)){{$dataInfo->content->id}}@endif>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -167,6 +197,7 @@
     <script src="/resources/admin/assets/pages/plugin/editor_md/editormd.min.js" type="text/javascript"></script>
     <script src="/resources/admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
             type="text/javascript"></script>
+    <script src="/resources/admin/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         // markdown 编辑器
         var editor;
@@ -180,6 +211,31 @@
                 imageFormats: ["jpg", "jpeg", "gif", "png"],
                 imageUploadURL: "{{route('upload')}}" + '?type=editor',
             });
+        });
+
+        // 请求中文转换英文接口
+        $('input[name=title]').blur(function () {
+            var title = $(this).val();
+            if ('' !== title) {
+                $.ajax({
+                    type: "post",
+                    url: "{{route('getArticleUrl')}}",
+                    data: {'title': title},
+                    dataType: "json",
+                    success: function (j) {
+                        if ('success' === j.status) {
+                            $('input[name=url]').val(j.data.articleUrl);
+                        }
+                    }
+                });
+            }
+        });
+
+        // 标签
+        $('.select2').select2({
+            placeholder: '请选择',
+            tags: true,
+            tokenSeparators: [',', ' ']
         });
     </script>
 @endsection

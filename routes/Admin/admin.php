@@ -30,5 +30,6 @@ Route::group(['prefix' => '/article'],function(){
     Route::get('/add', ['as' => 'articleAdd', 'uses' => 'ArticleController@add']);
     Route::get('/edit/{id}', ['as' => 'articleEdit', 'uses' => 'ArticleController@edit']);
     Route::post('/save', ['as' => 'articleSave', 'uses' => 'ArticleController@save']);
-    Route::any('/del/{id}', ['as' => 'articleDel', 'uses' => 'ArticleController@del']);
+    Route::delete('/del/{id}', ['as' => 'articleDel', 'uses' => 'ArticleController@del']);
+    Route::any('/getArticleUrl', ['as' => 'getArticleUrl', 'uses' => 'ArticleController@getArticleUrl']);
 });

@@ -10,6 +10,7 @@ namespace App\Repositories;
 use App\Exceptions\BusinessException;
 use App\Model\ArticleModel;
 use App\Model\ArticleContentModel;
+use App\Model\ArticleTagsModel;
 use Exception;
 use DB;
 
@@ -17,13 +18,17 @@ class ArticleRepository extends BaseRepository
 {
     protected $articleModel;
     protected $articleContentModel;
+    protected $articleTagsModel;
 
     public function __construct(
         ArticleModel $article,
-        ArticleContentModel $articleContent
-    ) {
+        ArticleContentModel $articleContent,
+        ArticleTagsModel $articleTagsModel
+    )
+    {
         $this->articleModel = $article;
         $this->articleContentModel = $articleContent;
+        $this->articleTagsModel = $articleTagsModel;
     }
 
     /**
@@ -39,9 +44,10 @@ class ArticleRepository extends BaseRepository
         // 存储文章基本内容
         try {
             $saveInfo = [
-                'id'        => empty($data['title']) ? '' : $data['id'],
+                'id'        => empty($data['id']) ? '' : $data['id'],
                 'title'     => $data['title'],
                 'subhead'   => empty($data['subhead']) ? '' : $data['subhead'],
+                'url'       => empty($data['url']) ? '' : $data['url'],
                 'desc'      => empty($data['desc']) ? '' : $data['desc'],
                 'img_url'   => empty($data['img_url']) ? '' : $data['img_url'],
                 'author'    => empty($data['author']) ? '' : $data['author'],
@@ -115,5 +121,20 @@ class ArticleRepository extends BaseRepository
     {
         return $this->articleModel->del($aid);
     }
+
+    //+++++++++++++标签管理 Start++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    public function tagSave($data)
+    {
+        $saveData = [
+            'name' => empty($data['name']) ? '' : $data['name'],
+            'url' => empty($data['url']) ? '' : $data['url'],
+            'status' => empty($data['status']) ? 0 : $data['status'],
+            'sort' => empty($data['sort']) ? 0 : $data['sort'],
+        ];
+        return $this->articleTagsModel->saveInfo($saveData);
+    }
+
+    //*++++++++++++++标签管理 End++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 }

@@ -14,6 +14,7 @@ class ArticleModel extends Eloquent
         'title',
         'subhead',
         'desc',
+        'url',
         'img_url',
         'author',
         'author_id',
