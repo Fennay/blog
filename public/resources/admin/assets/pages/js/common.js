@@ -30,7 +30,7 @@ function msg(j) {
     if ('' !== url) {
         setTimeout(function () {
             window.location.href = url;
-        }, 3000);
+        }, 2000);
     }
 }
 

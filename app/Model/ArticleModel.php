@@ -18,7 +18,7 @@ class ArticleModel extends Eloquent
         'img_url',
         'author',
         'author_id',
-        'tag_id',
+        'tags_id',
         'status',
         'sort',
         'clicks',

@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.23 on 2017-12-07.
+ * Generated for Laravel 5.5.23 on 2017-12-08.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -14335,6 +14335,33 @@ namespace Fennay\ModelHelper {
         }
         
         /**
+         * 创建或者是修改
+         *
+         * @param array $saveData
+         * @return mixed 创建成功返回成功后的主键Id，修改成功返回受影响的记录行数
+         * @author : Mikey
+         * @static 
+         */ 
+        public static function saveInfo($saveData)
+        {
+            return \Fennay\ModelHelper\HelperQueryBuilder::saveInfo($saveData);
+        }
+        
+        /**
+         * $saveData 如果是以为数组走保存更新，
+         * [['id'=>1,'name'=>'1'],['id'=>'2','name'=>'2']]
+         *
+         * @param array $saveData
+         * @return mixed 
+         * @author : Mikey
+         * @static 
+         */ 
+        public static function insertAll($saveData)
+        {
+            return \Fennay\ModelHelper\HelperQueryBuilder::insertAll($saveData);
+        }
+        
+        /**
          * 根据ID获取一条数据
          *
          * @param array $where
@@ -14391,19 +14418,6 @@ namespace Fennay\ModelHelper {
         public static function getPageList($where, $pageSize, $order, $field = array(), $pageName = 'page')
         {
             return \Fennay\ModelHelper\HelperQueryBuilder::getPageList($where, $pageSize, $order, $field, $pageName);
-        }
-        
-        /**
-         * 创建或者是修改
-         *
-         * @param array $saveData
-         * @return mixed 创建成功返回成功后的主键Id，修改成功返回受影响的记录行数
-         * @author : Mikey
-         * @static 
-         */ 
-        public static function saveInfo($saveData)
-        {
-            return \Fennay\ModelHelper\HelperQueryBuilder::saveInfo($saveData);
         }
         
         /**

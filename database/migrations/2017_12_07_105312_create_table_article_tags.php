@@ -14,9 +14,9 @@ class CreateTableArticleTags extends Migration
     {
         Schema::create('article_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50)->default('')->comment('标签名称');
-            $table->string('url', 50)->default('')->comment('英文名称');
-            $table->tinyInteger('status')->default(0)->comment('状态');
+            $table->string('name', 50)->unique()->default('')->comment('标签名称');
+            $table->string('url', 50)->unique()->default('')->comment('英文名称');
+            $table->tinyInteger('status')->default(1)->comment('状态');
             $table->integer('sort')->default(0)->comment('排序');
             $table->timestamps();
             $table->softDeletes();

@@ -11,6 +11,7 @@ use App\Exceptions\UploadException;
 use App\Services\UploadService;
 use App\Traits\CommonResponse;
 use Illuminate\Http\Request;
+use App\Services\BaiDuFanYiService;
 
 class PublicController extends BaseController
 {
@@ -23,6 +24,12 @@ class PublicController extends BaseController
         $this->uploadService = $uploadService;
     }
 
+    /**
+     * 图片上传
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author: Mikey
+     */
     public function upload(Request $request)
     {
         $type = $request->get('type');
@@ -42,11 +49,11 @@ class PublicController extends BaseController
                         ],
                         'maxFileSize'           => '20480',
                     ]);
-                }catch(UploadException $exe){
+                } catch (UploadException $exe) {
                     return response()->json(['success' => 0, 'message' => $exe->getMessage()]);
                 }
 
-                return response()->json(['success' => 1, 'message' => '上传成功', 'url' => asset(env('RESOURCE_URL_PREFIX').$uploaded)]);
+                return response()->json(['success' => 1, 'message' => '上传成功', 'url' => asset(env('RESOURCE_URL_PREFIX') . $uploaded)]);
                 break;
             default :
                 $filename = 'file';
@@ -65,5 +72,20 @@ class PublicController extends BaseController
                 return $this->ajaxSuccess('上传成功', ['img_url' => $uploaded]);
         }
 
+    }
+
+    /**
+     * 转换名称为英文
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author: Mikey
+     */
+    public function url2English(Request $request)
+    {
+        $title = $request->get('title');
+        $baiduFanyi = new BaiDuFanYiService(env('BAIDU_FANYI_APP_ID'), env('BAIDU_FANYI_APP_KEY'), env('BAIDU_FANYI_URL'));
+        $res = $baiduFanyi->run($title);
+
+        return $this->ajaxSuccess('获取成功', ['englishUrl' => $res]);
     }
 }

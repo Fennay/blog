@@ -22,7 +22,7 @@ class CreateTableArticle extends Migration
             $table->string('img_url',255)->default('')->comment('缩略图');
             $table->string('author',255)->default('')->comment('作者');
             $table->integer('author_id')->default(0)->comment('作者ID');
-            $table->string('tag_id')->default('')->comment('标签id,多个使用英文逗号隔开');
+            $table->string('tags_id')->default('')->comment('标签id,多个使用英文逗号隔开');
             $table->tinyInteger('status')->default(1)->comment('状态，1表示开启，0关闭');
             $table->integer('sort')->comment('排序')->default(0);
             $table->string('clicks')->default(0)->comment('阅读量');

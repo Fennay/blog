@@ -102,9 +102,14 @@
                                                 <label for="multiple" class="col-md-3 control-label">请选择标签</label>
                                                 <div class="col-md-4">
                                                     <select id="multiple" class="form-control select2 input-circle"
-                                                            multiple="multiple" name="tags[]">
-                                                        <option value="AK">Alaska</option>
-                                                        <option value="HI">Hawaii</option>
+                                                            multiple="multiple" name="tags[]" data-allow-clear="true">
+                                                        @foreach($tagsList as $k => $v)
+                                                            <option value="{{$v->id}}"
+                                                                @if(!empty($dataInfo->tags_id) && in_array($v->id,$dataInfo->tags_id)) selected @endif
+                                                            >
+                                                                {{$v->name}}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -121,8 +126,8 @@
                                                         </div>
                                                         <div>
                                                             <span class="btn red btn-outline btn-file">
-                                                                <span class="fileinput-new"> 选择 </span>
                                                                 <span class="fileinput-exists"> 修改 </span>
+                                                                <span class="fileinput-new"> 选择 </span>
                                                                 <input type="file" id="uploadFile" name="file"> </span>
                                                             <a href="javascript:;" id="uploadDelete"
                                                                class="btn red fileinput-exists"
@@ -204,8 +209,8 @@
         $(function () {
             editor = editormd({
                 id: "editormd",
-                width: "70%",
-                height: 540,
+                width: "65%",
+                height: 740,
                 path: "/resources/admin/assets/pages/plugin/editor_md/lib/",
                 imageUpload: true,
                 imageFormats: ["jpg", "jpeg", "gif", "png"],
@@ -219,12 +224,12 @@
             if ('' !== title) {
                 $.ajax({
                     type: "post",
-                    url: "{{route('getArticleUrl')}}",
+                    url: "{{route('url2English')}}",
                     data: {'title': title},
                     dataType: "json",
                     success: function (j) {
                         if ('success' === j.status) {
-                            $('input[name=url]').val(j.data.articleUrl);
+                            $('input[name=url]').val(j.data.englishUrl);
                         }
                     }
                 });
@@ -233,7 +238,7 @@
 
         // 标签
         $('.select2').select2({
-            placeholder: '请选择',
+            placeholder: '请选择标签...',
             tags: true,
             tokenSeparators: [',', ' ']
         });

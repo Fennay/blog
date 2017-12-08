@@ -36,6 +36,12 @@
                     <span class="title">文章列表</span>
                 </a>
             </li>
+            <li class="nav-item  ">
+                <a href="{{route('tagsList')}}" class="nav-link nav-toggle">
+                    <i class="icon-folder"></i>
+                    <span class="title">标签列表</span>
+                </a>
+            </li>
             <li class="heading">
                 <h3 class="uppercase">User</h3>
             </li>

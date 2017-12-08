@@ -72,7 +72,7 @@ class BaiDuFanYiService
         if (!empty($res['error_code'])) {
             throw new BusinessException($res['error_msg']);
         }
-        $articleUrl = $res['trans_result'][0]['dst'];
+        $articleUrl = strtolower($res['trans_result'][0]['dst']);
 
         return str_replace(' ', '-', $articleUrl);
     }
