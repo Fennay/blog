@@ -45,6 +45,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/resources/admin/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css"/>
     <link href="/resources/admin/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet"
           type="text/css"/>
+    <link href="/resources/admin/assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="/resources/admin/assets/global/css/components.min.css" rel="stylesheet" id="style_components"
@@ -169,11 +170,14 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/resources/admin/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 <script src="/resources/admin/assets/global/plugins/backstretch/jquery.backstretch.min.js"
         type="text/javascript"></script>
+<script src="/resources/admin/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
+
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="/resources/admin/assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/resources/admin/assets/pages/js/common.js" type="text/javascript"></script>
 <script src="/resources/admin/assets/pages/js/login.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->

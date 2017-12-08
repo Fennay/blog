@@ -12,6 +12,8 @@ use App\Traits\CommonResponse;
 use Exception;
 use Spatie\Permission\Traits\HasRoles;
 use App\Model\UserModel;
+use Illuminate\Http\Request;
+use Validator;
 
 class AccountController extends BaseController
 {
@@ -26,22 +28,51 @@ class AccountController extends BaseController
         $this->userObj = $user;
     }
 
-    public function login(UserRequest $request)
+    /**
+     * 登陆
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author: Mikey
+     */
+    public function login()
     {
+        return view('admin.login');
+    }
+
+    /**
+     * 登陆
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author: Mikey
+     */
+    public function doLogin(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $this->ajaxError($validator->messages()->first());
+        }
         $username = $request->get('username');
         $password = $request->get('password');
 
-        try{
+        try {
             $userInfo = UserModel::where(['username' => $username])->first();
-        }catch (Exception $e){
-             return $this->ajaxError($e->getMessage());
+        } catch (Exception $e) {
+            return $this->ajaxError($e->getMessage());
         }
-        if(empty($userInfo)){
-             return $this->ajaxError($username.'帐号不存在');
+        if (empty($userInfo)) {
+            return $this->ajaxError($username . '帐号不存在');
         }
 
-        if(password_verify($password,$userInfo->password)){
-            return $this->ajaxSuccess('登陆成功',['url' => route('admin.index')]);
+        if (password_verify($password, $userInfo->password)) {
+            session([
+                'username' => $username,
+                'uid'      => $userInfo->id
+            ]);
+
+            return $this->ajaxSuccess('登陆成功', ['url' => route('admin.index')]);
         }
 
         return $this->ajaxError('用户名或密码不正确');
@@ -63,17 +94,18 @@ class AccountController extends BaseController
         $username = $request->get('username');
         $password = $request->get('password');
 
-        $password = password_hash($password,PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         $saveData = [
             'username' => $username,
             'password' => $password,
         ];
 
-        try{
+        try {
             $this->userObj->saveInfo($saveData);
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             return $this->ajaxError($exception->getMessage());
         }
+
         return $this->ajaxSuccess('注册成功');
     }
 }
