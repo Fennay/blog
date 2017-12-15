@@ -11,6 +11,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "overtrue/laravel-lang": "~3.0",
+        "predis/predis": "^1.1",
         "spatie/laravel-permission": "^2.7"
     },
     "require-dev": {
@@ -59,7 +60,7 @@
     "repositories": {
         "packagist": {
             "type": "composer",
-            "url": "https://packagist.org"
+            "url": "https://packagist.phpcomposer.com"
         }
     }
 }
