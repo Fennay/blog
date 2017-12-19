@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Repositories\ArticleRepository;
 use App\Exceptions\HomeException;
+use HyperDown\Parser;
 
 class IndexController extends BaseController
 {
@@ -62,6 +63,10 @@ class IndexController extends BaseController
         if(empty($articleInfo)){
             return view(404);
         }
+
+        $content = $articleInfo->content->content;
+        $parser = new Parser();
+        $articleInfo->content->content = $parser->makeHtml($content);
 
         return view('home.detail', [
             'tagsList'     => $this->tagsList,

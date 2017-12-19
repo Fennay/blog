@@ -95,7 +95,7 @@
 
 <script type="text/javascript" src="/resources/home/js/tag_cloud.js"></script>
 
-
+@yield('page_js')
 <script>
     var _hmt = _hmt || [];
     (function () {

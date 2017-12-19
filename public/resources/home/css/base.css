@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+h1,h2{
+    border-bottom:1px solid #d6d6d6;
+    margin-bottom: 10px;
+}
 
 body {
     background: url('../images/bg.jpg');
