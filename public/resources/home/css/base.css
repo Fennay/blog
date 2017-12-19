@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url('../images/bg.jpg');
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #2f89b8;
+}
+
+legend{
+    margin-bottom: 5px;
+}
+
+.border {
+    border: double green 18px;
+    border-image: url('../images/border.png') 20 repeat;
+}
+
+fieldset legend {
+    position: relative;
+    top: -9px;
+}
+
+.clearfix {
+    /*zoom:1;*/ /* for ie6 & ie7 */
+    clear: both;
+}
+
+.container {
+    width: 78%;
+}
+
+/**导航**/
+.nav {
+    margin: 40px auto;
+    height: 30px;
+    line-height: 3px;
+}
+
+.nav ul li {
+    float: left;
+    width: 60px;
+}
+
+.nav ul li a {
+    color: #2f89b8;
+}
+
+/**中间内容**/
+.main {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.content {
+    width: 75%;
+    float: right;
+    margin: 30px 0 0
+}
+
+/**左边栏**/
+.sidebar {
+    float: left;
+    width: 20%;
+}
+
+.search {
+    height: 25px;
+    margin: 0 0 20px 0;
+    border-image: url('../images/search.png') 20 round;
+}
+
+.info {
+    margin: 30px 0;
+    height: 150px;
+}
+
+.info p {
+    text-indent: 10px;
+}
+
+/**标签云**/
+#tagCloud {
+    /*width: 215px;*/
+    margin: 30px 0;
+    height: 266px;
+    position: relative;
+}
+
+#tagCloud a {
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    font-family: Microsoft YaHei;
+    color: #68628d;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#tagCloud a:hover {
+    border: 1px solid #eee;
+    background: #000;
+}
+
+#tagCloud .blue {
+    color: #866006;
+}
+
+#tagCloud .red {
+    color: red;
+}
+
+#tagCloud .yellow {
+    color: #28610c;
+}
+
+#tagCloud p {
+    font: 12px Microsoft YaHei;
+    color: #13046c;
+}
+
+#tagCloud p a {
+    font-size: 12px;
+    color: #13046c;
+}
+
+#tagCloud p a:hover {
+    color: red;
+}
+
+/*日历*/
+#calender{
+    margin: 30px 0;
+}
+#calender #ca{
+    margin: 0 auto;
+}
+
+/**友情链接**/
+.flink {
+    margin: 50px auto 20px;
+}
+
+.flink ul li {
+    line-height: 150%;
+}
+
+/**底部**/
+.footer {
+    height: 30px;
+    line-height: 3px;
+    margin: 50px 0 0 0;
+    text-align: center
+}
+
