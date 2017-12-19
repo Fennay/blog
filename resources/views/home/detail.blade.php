@@ -2,8 +2,8 @@
 
 @section('seo')
     <title>{{$articleInfo->title}} | 笠缪 - Every Thing Will Be Fine</title>
-    <meta name="keywords" content="{{$articleInfo->seo_keywords}}">
-    <meta name="description" content="{{$articleInfo->seo_desc}}">
+    <meta name="keywords" content="{{$articleInfo->title}}">
+    <meta name="description" content="{{$articleInfo->title}}">
 @endsection
 
 @section('main')
