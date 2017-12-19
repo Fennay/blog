@@ -59,6 +59,10 @@ class IndexController extends BaseController
 
         $articleInfo = $this->articleObj->getArticleInfoByUrl($articleUrl);
 
+        if(empty($articleInfo)){
+            return view(404);
+        }
+
         return view('home.detail', [
             'tagsList'     => $this->tagsList,
             'articleInfo'  => $articleInfo,
