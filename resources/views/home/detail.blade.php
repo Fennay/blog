@@ -11,7 +11,7 @@
     <div class="col-sm-9">
         <h1>{{$articleInfo->title}}</h1>
         <div class="article" id="content">
-            {!! $articleInfo->content !!}
+            {!! $articleInfo->content->content !!}
         </div>
     </div>
 @endsection
