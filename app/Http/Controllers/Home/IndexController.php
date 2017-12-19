@@ -106,7 +106,7 @@ class IndexController extends BaseController
     {
         $data = $this->articleObj->getArticleListGroupByDate();
         if (empty($data)) {
-            return [];
+            return '';
         }
         foreach ($data as $k => $v) {
             $tmp['date'] = $k;

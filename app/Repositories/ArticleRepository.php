@@ -135,7 +135,6 @@ class ArticleRepository extends BaseRepository
     public function getArticleInfoByUrl($url)
     {
         $articleInfo = $this->articleModel->findOne(['url' => $url]);
-        $articleInfo->content = $this->articleContentModel->findOne(['aid' => $articleInfo->id])['content'];
 
         return $articleInfo;
     }
