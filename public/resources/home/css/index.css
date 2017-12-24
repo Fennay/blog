@@ -6,6 +6,6 @@
 .article {margin-top:70px;line-height: 150%;}
 .article h1{color:#2769a1;font-size: 24px;}
 .article ul{margin:20px 0 0 0;font-size: 12px;text-indent: 18px;}
-.article ul li{float: left;margin:0 50px 0 0;}
+.article ul li{float: left;margin:0 50px 0 0;width: 200px;}
 .article .detail{width:60px;height:40px;font-size:12px;margin-top:20px;border: double green 8px;float:right;border-image: url('../images/btn.png') 10 round;text-align: center;margin-right: 80px;}
 

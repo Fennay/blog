@@ -183,7 +183,10 @@ class ArticleRepository extends BaseRepository
         'id'   => 'desc'
     ])
     {
-        return $this->articleModel->getPageList(['status' => 1], $pageSize, $order);
+        $dataList = $this->articleModel->getPageList(['status' => 1], $pageSize, $order);
+        $dataList = $this->setArticleTagsInfo($dataList);
+
+        return $dataList;
     }
 
     /**
@@ -230,8 +233,9 @@ class ArticleRepository extends BaseRepository
     /**
      * 通过标签名称获取文章列表
      * @param $tag
-     * @return array
+     * @return \Illuminate\Support\Collection|mixed
      * @throws HomeException
+     * @author: Mikey
      */
     public function getArticleListByTag($tag)
     {
@@ -246,14 +250,45 @@ class ArticleRepository extends BaseRepository
 
         try {
             $where = [];
-            $where['tag_id'] = ['like', '%' . $tagId . '%'];
+            $where['tags_id'] = ['like', '%' . $tagId . '%'];
+            $where['status'] = 1;
 
             $data = $this->articleModel->getList($where, 0, ['sort' => 'desc', 'id' => 'desc']);
+            $data = $this->setArticleTagsInfo($data);
+
+            return $data;
         } catch (HomeException $exe) {
             throw new HomeException($exe->getMessage());
         }
+    }
+
+    /**
+     * @param $data
+     * @return \Illuminate\Support\Collection
+     * @author: Mikey
+     */
+    public function setArticleTagsInfo($data)
+    {
+        if (empty($data)) {
+            return collect();
+        }
+
+        // 一维数组
+        if (!count(current($data))) {
+            $tagIds = $data->tags_id;
+            $tagsInfo = $this->articleTagsModel->getList(['status' => 1, 'id' => ['in', explode(',', $tagIds)]]);
+            $data->tags = $tagsInfo;
+
+            return $data;
+        }
+
+        foreach ($data as $k => $v) {
+            $tagsIds = $v->tags_id;
+            $data[$k]->tags = $this->articleTagsModel->getList(['status' => 1, 'id' => ['in', explode(',', $tagsIds)]]);
+        }
 
         return $data;
+
     }
 
     //+++++++++++++标签管理 Start++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

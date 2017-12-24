@@ -60,10 +60,11 @@ class IndexController extends BaseController
 
         $articleInfo = $this->articleObj->getArticleInfoByUrl($articleUrl);
 
-        if(empty($articleInfo)){
+        if (empty($articleInfo)) {
             return view(404);
         }
 
+        // markdown转换
         $content = $articleInfo->content->content;
         $parser = new Parser();
         $articleInfo->content->content = $parser->makeHtml($content);
@@ -105,8 +106,9 @@ class IndexController extends BaseController
         }
 
         return view('home.index', [
-            'tagsList'    => $this->tagsList,
-            'articleList' => $articleList
+            'tagsList'     => $this->tagsList,
+            'articleList'  => $articleList,
+            'calendarData' => $this->calendarData
         ]);
     }
 
