@@ -14,6 +14,7 @@ use App\Model\ArticleTagsModel;
 use App\Services\BaiDuFanYiService;
 use Exception;
 use DB;
+use App\Exceptions\HomeException;
 
 class ArticleRepository extends BaseRepository
 {
@@ -115,6 +116,30 @@ class ArticleRepository extends BaseRepository
     }
 
     /**
+     * 通过文章Id获取文章
+     * @param $articleId
+     * @return mixed
+     * Author: Fengguangyong
+     */
+    public function getArticleUrlById($articleId)
+    {
+        return $this->articleModel->getOne($articleId)->url;
+    }
+
+    /**
+     * 通过URL获取文章
+     * @param $url
+     * @return mixed
+     * Author: Fengguangyong
+     */
+    public function getArticleInfoByUrl($url)
+    {
+        $articleInfo = $this->articleModel->findOne(['url' => $url]);
+
+        return $articleInfo;
+    }
+
+    /**
      * 根据文章Id获取文章内容
      * @param $articleId
      * @return mixed
@@ -145,6 +170,125 @@ class ArticleRepository extends BaseRepository
     public function delArticleByUid($aid)
     {
         return $this->articleModel->del($aid);
+    }
+
+    /**
+     * 获取状态为1的分页数据
+     * @param int   $pageSize
+     * @param array $order
+     * @return mixed
+     */
+    public function getArticlePageListWith1Status($pageSize = 10, $order = [
+        'sort' => 'desc',
+        'id'   => 'desc'
+    ])
+    {
+        $dataList = $this->articleModel->getPageList(['status' => 1], $pageSize, $order);
+        $dataList = $this->setArticleTagsInfo($dataList);
+
+        return $dataList;
+    }
+
+    /**
+     * 通过日期获取文章数据
+     * @return array
+     * Author: Mikey
+     */
+    public function getArticleListGroupByDate()
+    {
+        $data = $this->articleModel->getList(['status' => 1], 0, [
+            'sort' => 'desc',
+            'id'   => 'desc'
+        ]);
+        if (empty($data)) {
+            return [];
+        }
+
+        $newData = [];
+        foreach ($data as $k => $v) {
+            $tmp['title'] = $v['title'];
+            $tmp['url'] = $v['url'];
+            $newData[$v->created_at->toDateString()][] = $tmp;
+        }
+
+        return $newData;
+    }
+
+    /**
+     * 点击次数
+     * @param $articleId
+     * @return mixed
+     * @throws HomeException
+     */
+    public function addClicks($articleId)
+    {
+        // 如果为空,则返回空数组
+        if (empty($articleId)) {
+            throw new HomeException('参数错误');
+        }
+
+        return $this->articleModel->where(['url' => $articleId])->increment('clicks', 1);
+    }
+
+    /**
+     * 通过标签名称获取文章列表
+     * @param $tag
+     * @return \Illuminate\Support\Collection|mixed
+     * @throws HomeException
+     * @author: Mikey
+     */
+    public function getArticleListByTag($tag)
+    {
+        try {
+            $tagId = $this->getTagIdByTagName($tag);
+            if (empty($tagId)) {
+                throw new HomeException('标签不存在');
+            }
+        } catch (HomeException $exe) {
+            throw new HomeException($exe->getMessage());
+        }
+
+        try {
+            $where = [];
+            $where['tags_id'] = ['like', '%' . $tagId . '%'];
+            $where['status'] = 1;
+
+            $data = $this->articleModel->getList($where, 0, ['sort' => 'desc', 'id' => 'desc']);
+            $data = $this->setArticleTagsInfo($data);
+
+            return $data;
+        } catch (HomeException $exe) {
+            throw new HomeException($exe->getMessage());
+        }
+    }
+
+    /**
+     * @param $data
+     * @return \Illuminate\Support\Collection
+     * @author: Mikey
+     */
+    public function setArticleTagsInfo($data)
+    {
+        if (empty($data)) {
+            return collect();
+        }
+
+        // 一维数组
+        if (!count(current($data))) {
+            $tagIds = $data->tags_id;
+            $tagsInfo = $this->articleTagsModel->getList(['status' => 1, 'id' => ['in', explode(',', $tagIds)]]);
+            $data->tags = $tagsInfo;
+
+            return $data;
+        }
+
+        foreach ($data as $k => $v) {
+            $tagsIds = $v->tags_id;
+            $data[$k]->tags = $this->articleTagsModel->getList(['status' => 1, 'id' => ['in', explode(',', $tagsIds)]]);
+        }
+
+        return $data;
+
     }
 
     //+++++++++++++标签管理 Start++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -221,12 +365,14 @@ class ArticleRepository extends BaseRepository
 
     /**
      * 获取状态为1的标签
+     * @param int   $size
+     * @param array $order
      * @return mixed
      * @author: Mikey
      */
-    public function getTagsListWith1Status()
+    public function getTagsListWith1Status($size = 0, $order = ['sort' => 'desc', 'id' => 'desc'])
     {
-        return $this->articleTagsModel->getList(['status' => 1]);
+        return $this->articleTagsModel->getList(['status' => 1], $size, $order);
     }
 
     /**
@@ -238,6 +384,22 @@ class ArticleRepository extends BaseRepository
     public function getTagsListByTagIds(array $tagIds)
     {
         return $this->articleTagsModel->getList(['id' => ['in', $tagIds]]);
+    }
+
+    /**
+     * 通过标签名称获取标签ID
+     * @param $tagName
+     * @return mixed
+     * @throws HomeException
+     */
+    public function getTagIdByTagName($tagName)
+    {
+        // 判断是否为空
+        if (empty($tagName)) {
+            throw new HomeException('标签名不能为空');
+        }
+
+        return $this->articleTagsModel->findOne(['name' => $tagName, 'status' => 1])['id'];
     }
 
     //*++++++++++++++标签管理 End++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

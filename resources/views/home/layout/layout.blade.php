@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
     <link rel="stylesheet" href="/resources/home/css/index.css">
+    <!-- markdown样式 -->
+    <link rel="stylesheet" href="/resources/home/css/github-markdown.css" type="text/css" />
 
     <!-- 代码高亮插件 -->
     <script type="text/javascript" src="/resources/plugins/syntaxHighlighter/scripts/shCore.js"></script>
@@ -93,7 +95,7 @@
 
 <script type="text/javascript" src="/resources/home/js/tag_cloud.js"></script>
 
-
+@yield('page_js')
 <script>
     var _hmt = _hmt || [];
     (function () {

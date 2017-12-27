@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', [
-    'as' => 'home.index',
-    'uses' => 'IndexController@index'
-]);
+Route::get('/', ['as'   => 'home.index','uses' => 'IndexController@index']);
+// 详情页
+Route::get('/{articleId}', ['as' => 'articleDetail', 'uses' => 'IndexController@detail']);
+//通过标签获取文章列表
+Route::get('/tag/{tag}', ['as' => 'tag', 'uses' => 'IndexController@tag']);

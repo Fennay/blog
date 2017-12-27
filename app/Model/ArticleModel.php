@@ -28,7 +28,7 @@ class ArticleModel extends Eloquent
 
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
+
     }
 
     public function content()
