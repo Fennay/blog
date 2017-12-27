@@ -60,8 +60,8 @@ class BaiDuFanYiService
         $response = $this->client->request('POST', $this->url, [
             'query' => [
                 'q'     => $title,
-                'from'  => 'auto',
-                'to'    => 'auto',
+                'from'  => 'zh',
+                'to'    => 'en',
                 'appid' => $this->appId,
                 'salt'  => $salt,
                 'sign'  => $this->sign($title, $salt),

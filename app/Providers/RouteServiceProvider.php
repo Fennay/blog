@@ -9,16 +9,13 @@ class RouteServiceProvider extends ServiceProvider
 {
     /**
      * This namespace is applied to your controller routes.
-     *
      * In addition, it is set as the URL generator's root namespace.
-     *
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
-     *
      * @return void
      */
     public function boot()
@@ -30,14 +27,16 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define the routes for the application.
-     *
      * @return void
      */
     public function map()
     {
         $this->mapApiRoutes();
 
+        // 不带www
         $this->mapWebRoutes();
+        // 带www
+        $this->mapWebWithWWWRoutes();
 
         $this->mapAdminRoutes();
 
@@ -46,39 +45,43 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define the "web" routes for the application.
-     *
      * These routes all receive session state, CSRF protection, etc.
-     *
      * @return void
      */
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->domain(env('HOME_DOMAIN_URL'))
-             ->namespace($this->namespace.'\Home')
-             ->group(base_path('routes/Home/web.php'));
+            ->domain(env('HOME_DOMAIN_URL'))
+            ->namespace($this->namespace . '\Home')
+            ->group(base_path('routes/Home/web.php'));
+    }
+
+    protected function mapWebWithWWWRoutes()
+    {
+        Route::middleware('web')
+            ->domain(env('HOME_DOMAIN_URL_WWW'))
+            ->namespace($this->namespace . '\Home')
+            ->group(base_path('routes/Home/web.php'));
     }
 
     /**
      * Define the "api" routes for the application.
-     *
      * These routes are typically stateless.
-     *
      * @return void
      */
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 
     protected function mapAdminRoutes()
     {
         Route::prefix('/')
             ->domain(env('ADMIN_DOMAIN_URL'))
-            ->namespace($this->namespace.'\Admin')
+            ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/Admin/admin.php'));
     }
 }
