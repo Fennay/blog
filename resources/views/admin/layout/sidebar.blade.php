@@ -19,7 +19,7 @@
                     <span class="arrow open"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start active open">
+                    <li class="nav-item start">
                         <a href="index.html" class="nav-link ">
                             <i class="icon-direction"></i>
                             <span class="title">查看站点</span>
@@ -32,13 +32,13 @@
             </li>
             <li class="nav-item">
                 <a href="{{route('articleList')}}" class="nav-link nav-toggle">
-                    <i class="icon-folder"></i>
+                    <i class="icon-list"></i>
                     <span class="title">文章列表</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{route('tagsList')}}" class="nav-link nav-toggle">
-                    <i class="icon-folder"></i>
+                    <i class="icon-tag"></i>
                     <span class="title">标签列表</span>
                 </a>
             </li>
@@ -53,7 +53,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{route('logout')}}" class="nav-link nav-toggle">
-                    <i class="icon-user"></i>
+                    <i class="icon-logout"></i>
                     <span class="title">退出登录</span>
                 </a>
             </li>

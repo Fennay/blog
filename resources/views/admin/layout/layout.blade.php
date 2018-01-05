@@ -112,9 +112,8 @@ License: You must have a valid license purchased only from themeforest(the above
 						</a>
 					</li>
 					<li class="separator hide"></li>
-					<li class="dropdown dropdown-extended dropdown-notification dropdown-dark">
-						<a href="{{route('logout')}}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-						   data-close-others="true">
+					<li class="dropdown">
+						<a href="{{route('logout')}}" style="display: block;width: 44px;height: 74px;" class="dropdown-toggle">
 							<i class="icon-logout"></i>
 						</a>
 					</li>
