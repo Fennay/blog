@@ -78,6 +78,19 @@ class AccountController extends BaseController
         return $this->ajaxError('用户名或密码不正确');
     }
 
+    /**
+     * 退出登录
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function logout()
+    {
+        session([
+            'username' => '',
+            'uid'      => ''
+        ]);
+        return redirect('/login');
+    }
+
     public function checkLogin()
     {
 

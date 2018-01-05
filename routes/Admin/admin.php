@@ -7,6 +7,8 @@
  */
 // 登陆
 Route::get('/login', ['as' => 'login', 'uses' => 'AccountController@login']);
+// 退出登录
+Route::get('/logout', ['as' => 'logout', 'uses' => 'AccountController@logout']);
 Route::post('/doLogin', ['as' => 'doLogin', 'uses' => 'AccountController@doLogin']);
 Route::any('/register', ['as' => 'register', 'uses' => 'AccountController@register']);
 Route::group(['middleware' => 'authd'], function () {
@@ -35,7 +37,7 @@ Route::group(['middleware' => 'authd'], function () {
         Route::delete('/del/{id}', ['as' => 'articleDel', 'uses' => 'ArticleController@del']);
         Route::any('/getArticleUrl', ['as' => 'getArticleUrl', 'uses' => 'ArticleController@getArticleUrl']);
     });
-// 标签管理
+    // 标签管理
     Route::group(['prefix' => '/tags'], function () {
         Route::get('/', ['as' => 'tagsList', 'uses' => 'ArticleTagsController@index']);
         Route::get('/add', ['as' => 'tagsAdd', 'uses' => 'ArticleTagsController@add']);
