@@ -30,13 +30,13 @@
             <li class="heading">
                 <h3 class="uppercase">Articles</h3>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item">
                 <a href="{{route('articleList')}}" class="nav-link nav-toggle">
                     <i class="icon-folder"></i>
                     <span class="title">文章列表</span>
                 </a>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item">
                 <a href="{{route('tagsList')}}" class="nav-link nav-toggle">
                     <i class="icon-folder"></i>
                     <span class="title">标签列表</span>
@@ -45,10 +45,16 @@
             <li class="heading">
                 <h3 class="uppercase">User</h3>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item">
                 <a href="{{route('userList')}}" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">用户列表</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('logout')}}" class="nav-link nav-toggle">
+                    <i class="icon-user"></i>
+                    <span class="title">退出登录</span>
                 </a>
             </li>
         </ul>

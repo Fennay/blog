@@ -62,7 +62,7 @@ class UserRepository extends BaseRepository
             $lastUid = empty($lastUid->id) ? 0 : $lastUid->id;
             $saveData['sort'] = $lastUid + 1;
         } else {
-            !empty($saveData['password']) && $saveData['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            !empty($data['password']) && $saveData['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         }
 
         try {
