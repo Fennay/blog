@@ -1,6 +1,29 @@
 @import url('base.css');
 
-.bread-nav{font-size: 12px;}
-.content h1{font-size: 25px;text-align: center;margin-top: 15px;color:#2769a1;}
-.content ul{width:100%;margin:20px auto 0 auto;font-size: 12px;}
-.content ul li{float: left;margin:0 50px 0 0;}
+.title {
+    text-align: center;
+    margin: 0 0 80px 0;
+    border: none;
+}
+
+.bread-nav {
+    font-size: 12px;
+}
+
+.content h1 {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 15px;
+    color: #2769a1;
+}
+
+.content ul {
+    width: 100%;
+    margin: 20px auto 0 auto;
+    font-size: 12px;
+}
+
+.content ul li {
+    float: left;
+    margin: 0 50px 0 0;
+}
