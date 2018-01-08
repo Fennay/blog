@@ -7,10 +7,10 @@
 
 namespace App\Http\Controllers\Home;
 
-
 use App\Repositories\ArticleRepository;
 use App\Exceptions\HomeException;
 use HyperDown\Parser;
+use Cache;
 
 class IndexController extends BaseController
 {
@@ -25,6 +25,10 @@ class IndexController extends BaseController
         $this->calendarData = $this->calendarData();
     }
 
+    /**
+     * 首页
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $articleList = $this->articleObj->getArticlePageListWith1Status();
@@ -45,29 +49,32 @@ class IndexController extends BaseController
      */
     public function detail($articleUrl)
     {
-        if (empty($articleUrl)) {
-            view(404);
-        }
-
-        $this->addClick($articleUrl);
-
         // 如果为Id，则转换成URL
         if (is_numeric($articleUrl)) {
             $articleUrl = $this->articleObj->getArticleUrlById($articleUrl);
 
             return redirect(route('articleDetail', ['articleUrl' => $articleUrl]));
         }
+        // 添加点击
+        $this->addClick($articleUrl);
+        // 缓存key
+        $cacheKey = 'get_index_article_detail_by_article_url_' . $articleUrl;
+        $articleInfo = Cache::remember($cacheKey, 5, function () use ($articleUrl) {
+            $articleInfo = $this->articleObj->getArticleInfoByUrl($articleUrl);
+            if (empty($articleInfo)) {
+                return false;
+            }
+            // markdown转换
+            $content = $articleInfo->content->content;
+            $parser = new Parser();
+            $articleInfo->content->content = $parser->makeHtml($content);
 
-        $articleInfo = $this->articleObj->getArticleInfoByUrl($articleUrl);
+            return $articleInfo;
+        });
 
-        if (empty($articleInfo)) {
-            return view(404);
+        if (false == $articleInfo) {
+            return view('404');
         }
-
-        // markdown转换
-        $content = $articleInfo->content->content;
-        $parser = new Parser();
-        $articleInfo->content->content = $parser->makeHtml($content);
 
         return view('home.detail', [
             'tagsList'     => $this->tagsList,
@@ -123,7 +130,8 @@ class IndexController extends BaseController
             $tmp['date'] = $k;
             $tmp['value'] = '';
             foreach ($v as $item => $value) {
-                $tmp['value'] .= '<p><a href="' . route('articleDetail', ['url' => $value['url']]) . '" target="_blank">' . $value['title'] . '</p>';
+                $tmp['value'] .= '<p><a href="' . route('articleDetail',
+                        ['url' => $value['url']]) . '" target="_blank">' . $value['title'] . '</p>';
             }
             $newData[] = $tmp;
         }

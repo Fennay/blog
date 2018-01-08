@@ -25,6 +25,10 @@ legend{
     margin-bottom: 5px;
 }
 
+img{
+    width: 100%;
+}
+
 .border {
     border: double green 18px;
     border-image: url('../images/border.png') 20 repeat;
