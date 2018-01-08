@@ -1,9 +1,13 @@
 @extends('home.layout.layout')
 
 @section('seo')
-    <title>笠缪 - Every Thing Will Be Fine</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+<title>笠缪 - Every Thing Will Be Fine</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+@endsection
+
+@section('page_css')
+<link rel="stylesheet" href="/resources/home/css/index.css">
 @endsection
 
 @section('main')
