@@ -1,13 +1,14 @@
 @extends('home.layout.layout')
 
 @section('seo')
-	<title>{{$articleInfo->title}} | 笠缪 - Every Thing Will Be Fine</title>
-	<meta name="keywords" content="{{$articleInfo->title}}">
-	<meta name="description" content="{{$articleInfo->title}}">
+<title>{{$articleInfo->title}} | 笠缪 - Every Thing Will Be Fine</title>
+<meta name="keywords" content="{{$articleInfo->title}}">
+<meta name="description" content="{{$articleInfo->title}}">
 @endsection
-
+@section('page_css')
+<link rel="stylesheet" href="/resources/home/css/detail.css">
+@endsection
 @section('main')
-
 	<div class="col-sm-9 ">
 		<h1 class="title">{{$articleInfo->title}}</h1>
 		<div class="" id="content">
@@ -15,8 +16,6 @@
 		</div>
 		<div id="disqus_thread" style="margin: 100px 0 0 0"></div>
 	</div>
-
-
 	<script>
         /**
          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
