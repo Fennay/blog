@@ -9,7 +9,7 @@
 @section('main')
 
 	<div class="col-sm-9 ">
-		<h1>{{$articleInfo->title}}</h1>
+		<h1 class="title">{{$articleInfo->title}}</h1>
 		<div class="" id="content">
 			{!! $articleInfo->content->content !!}
 		</div>
