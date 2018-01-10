@@ -29,13 +29,14 @@ class ArticleRequest extends FormRequest
     public function rules(Request $request)
     {
         $rules = [
-            //'title'     => 'required|unique:article',
+            'title'     => 'required|unique:article',
             'subhead'  => 'nullable|between:0,50',
+            'desc'  => 'nullable|between:0,255',
         ];
         $id = $request->get('id');
         // 如果编辑则不验证唯一性
         if (!empty($id)) {
-            //$rules['title'] = 'required';
+            $rules['title'] = 'required';
         }
 
         return $rules;
@@ -44,7 +45,8 @@ class ArticleRequest extends FormRequest
     public function messages()
     {
         return [
-            'subhead.between' => 'subhead 必须介于 :min - :max 之间。'
+            'subhead.between' => '副标题 必须介于 :min - :max 之间。',
+            'desc.between' => '描述 必须介于 :min - :max 之间。'
         ];
     }
 }

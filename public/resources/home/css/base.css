@@ -6,6 +6,7 @@
 h1,h2{
     border-bottom:1px solid #d6d6d6;
     margin-bottom: 10px;
+    padding: 0 0 3px 0;
 }
 
 body {

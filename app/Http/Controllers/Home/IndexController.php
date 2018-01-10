@@ -85,13 +85,13 @@ class IndexController extends BaseController
 
     /**
      * 点击次数
-     * @param $articleId
+     * @param $articleUrl
      * @return mixed
      * @throws \App\Exceptions\HomeException
      */
-    public function addClick($articleId)
+    public function addClick($articleUrl)
     {
-        return $this->articleObj->addClicks($articleId);
+        return $this->articleObj->addClicks($articleUrl);
     }
 
 

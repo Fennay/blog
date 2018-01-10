@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ArticleModel extends Eloquent
 {
     use SoftDeletes;
-    protected $table = 'article';
+    public $table = 'article';
+    // public $clearKeys;
 
     protected $fillable = [
         'title',
@@ -29,6 +30,10 @@ class ArticleModel extends Eloquent
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
+        $this->clearKeys = [
+            'get_index_article_detail_by_article_url_*',
+            'get_article_list_group_by_date_*',
+        ];
     }
 
     public function content()
