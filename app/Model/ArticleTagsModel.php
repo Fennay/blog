@@ -20,9 +20,10 @@ class ArticleTagsModel extends Eloquent
         'updated_at',
     ];
 
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
-
+        parent::__construct($attributes);
+        $this->clearKeys = [];
     }
 
 }

@@ -20,7 +20,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start">
-                        <a href="{{config('pro.web_home_url')}}" class="nav-link ">
+                        <a href="{{config('pro.web_home_url')}}" target="_blank" class="nav-link ">
                             <i class="icon-direction"></i>
                             <span class="title">查看站点</span>
                         </a>

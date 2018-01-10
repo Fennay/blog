@@ -96,6 +96,7 @@
 <script type="text/javascript" src="/resources/home/js/tag_cloud.js"></script>
 
 @yield('page_js')
+@if(config('app.debug') == false)
 <script>
     var _hmt = _hmt || [];
     (function () {
@@ -105,6 +106,7 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+@endif
 <script type="text/javascript" color="128,128,128" opacity='0.7' zIndex="-1" count="150"
         src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
 </body>

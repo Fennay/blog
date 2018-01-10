@@ -196,6 +196,8 @@ class ArticleRepository extends BaseRepository
      */
     public function getArticleListGroupByDate()
     {
+        // dump($this->articleModel->setCacheKey);
+        $this->articleModel->setCacheKey('get_article_list_group_by_date');
         $data = $this->articleModel->getList(['status' => 1], 0, [
             'sort' => 'desc',
             'id'   => 'desc'
@@ -216,18 +218,13 @@ class ArticleRepository extends BaseRepository
 
     /**
      * 点击次数
-     * @param $articleId
+     * @param $articleUrl
      * @return mixed
      * @throws HomeException
      */
-    public function addClicks($articleId)
+    public function addClicks($articleUrl)
     {
-        // 如果为空,则返回空数组
-        if (empty($articleId)) {
-            throw new HomeException('参数错误');
-        }
-
-        return $this->articleModel->where(['url' => $articleId])->increment('clicks', 1);
+        return $this->articleModel->where(['url' => $articleUrl])->increment('clicks', 1);
     }
 
     /**
@@ -284,11 +281,11 @@ class ArticleRepository extends BaseRepository
 
         foreach ($data as $k => $v) {
             $tagsIds = $v->tags_id;
-            $data[$k]->tags = $this->articleTagsModel->getList(['status' => 1, 'id' => ['in', explode(',', $tagsIds)]]);
+            $tagsIds = explode(',', $tagsIds);
+            $data[$k]->tags = $this->articleTagsModel->getList(['status'=>1,'id'=>['in',$tagsIds]]);
         }
 
         return $data;
-
     }
 
     //+++++++++++++标签管理 Start++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -372,6 +369,8 @@ class ArticleRepository extends BaseRepository
      */
     public function getTagsListWith1Status($size = 0, $order = ['sort' => 'desc', 'id' => 'desc'])
     {
+        $cacheKey = 'get_tags_list_with_1_status_size_'.$size.'_order_'.md5(serialize($order));
+        $this->articleTagsModel->setCacheKey($cacheKey);
         return $this->articleTagsModel->getList(['status' => 1], $size, $order);
     }
 
