@@ -63,8 +63,8 @@ class ArticleController extends BaseController
      */
     public function edit($aid)
     {
-        $dataInfo = $this->articleObj->getArticleInfoByArticleId($aid);
-        $dataInfo->tags_id = explode(',',$dataInfo->tags_id);
+        $dataInfo = $this->articleObj->getArticleInfoByArticleId(intval($aid));
+        !empty($dataInfo->tags_id) && $dataInfo->tags_id = explode(',',$dataInfo->tags_id);
         return view('admin.article.edit', [
             'dataInfo' => $dataInfo,
             'tagsList' => $this->articleObj->getTagsListWith1Status()

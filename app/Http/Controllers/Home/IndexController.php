@@ -11,6 +11,7 @@ use App\Repositories\ArticleRepository;
 use App\Exceptions\HomeException;
 use HyperDown\Parser;
 use Cache;
+use Redis;
 
 class IndexController extends BaseController
 {
@@ -102,9 +103,6 @@ class IndexController extends BaseController
      */
     public function tag($tag)
     {
-        if (empty($tag)) {
-            view(404);
-        }
         $articleList = [];
         try {
             $articleList = $this->articleObj->getArticleListByTag($tag);

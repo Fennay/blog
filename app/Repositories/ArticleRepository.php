@@ -28,8 +28,7 @@ class ArticleRepository extends BaseRepository
         ArticleContentModel $articleContent,
         ArticleTagsModel $articleTagsModel,
         BaiDuFanYiService $baiDuFanYiService
-    )
-    {
+    ) {
         $this->articleModel = $article;
         $this->articleContentModel = $articleContent;
         $this->articleTagsModel = $articleTagsModel;
@@ -145,9 +144,9 @@ class ArticleRepository extends BaseRepository
      * @return mixed
      * @author: Mikey
      */
-    public function getArticleInfoByArticleId($articleId)
+    public function getArticleInfoByArticleId(int $articleId)
     {
-        return $this->articleModel->getOne($articleId);
+        return $this->articleModel->getOne(intval($articleId));
     }
 
     /**
@@ -158,7 +157,9 @@ class ArticleRepository extends BaseRepository
      */
     public function getAdminArticlePageList($pageSize = 10)
     {
-        return $this->articleModel->getPageList([], $pageSize, ['sort' => 'desc', 'id' => 'desc']);
+        $dataList = $this->articleModel->getPageList([], $pageSize, ['sort' => 'desc', 'id' => 'desc']);
+
+        return $this->setArticleTagsInfo($dataList);
     }
 
     /**
@@ -178,11 +179,13 @@ class ArticleRepository extends BaseRepository
      * @param array $order
      * @return mixed
      */
-    public function getArticlePageListWith1Status($pageSize = 10, $order = [
-        'sort' => 'desc',
-        'id'   => 'desc'
-    ])
-    {
+    public function getArticlePageListWith1Status(
+        $pageSize = 10,
+        $order = [
+            'sort' => 'desc',
+            'id'   => 'desc'
+        ]
+    ) {
         $dataList = $this->articleModel->getPageList(['status' => 1], $pageSize, $order);
         $dataList = $this->setArticleTagsInfo($dataList);
 
@@ -282,7 +285,7 @@ class ArticleRepository extends BaseRepository
         foreach ($data as $k => $v) {
             $tagsIds = $v->tags_id;
             $tagsIds = explode(',', $tagsIds);
-            $data[$k]->tags = $this->articleTagsModel->getList(['status'=>1,'id'=>['in',$tagsIds]]);
+            $data[$k]->tags = $this->articleTagsModel->getList(['status' => 1, 'id' => ['in', $tagsIds]]);
         }
 
         return $data;
@@ -369,8 +372,9 @@ class ArticleRepository extends BaseRepository
      */
     public function getTagsListWith1Status($size = 0, $order = ['sort' => 'desc', 'id' => 'desc'])
     {
-        $cacheKey = 'get_tags_list_with_1_status_size_'.$size.'_order_'.md5(serialize($order));
+        $cacheKey = 'get_tags_list_with_1_status_size_' . $size . '_order_' . md5(serialize($order));
         $this->articleTagsModel->setCacheKey($cacheKey);
+
         return $this->articleTagsModel->getList(['status' => 1], $size, $order);
     }
 

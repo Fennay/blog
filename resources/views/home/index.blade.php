@@ -18,7 +18,7 @@
                     <h3><a href="{{route('articleDetail',['url'=>$vo->url])}}">{{$vo->title}}</a></h3>
                     <ul>
                         <li>标签： @foreach($vo->tags as $item)<a
-                                    href="{{route('tag',['tags' => $item->url])}}">{{$item->name}}</a> &nbsp;@endforeach
+                                    href="{{route('tag',['tags' => $item->name])}}">{{$item->name}}</a> &nbsp;@endforeach
                         </li>
                         <li>发布时间： {{$vo->created_at}}</li>
                         <li>点击数: {{$vo->clicks}}</li>
