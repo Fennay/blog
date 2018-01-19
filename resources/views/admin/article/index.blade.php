@@ -40,6 +40,7 @@
                                 <th><i class="fa fa-briefcase"></i> 编号</th>
                                 <th class="hidden-xs"><i class="fa fa-smail-o"></i> 文章名</th>
                                 <th>副标题</th>
+                                <th>标签</th>
                                 <th width="140">图片地址</th>
                                 <th>状态</th>
                                 <th>创建时间</th>
@@ -53,8 +54,16 @@
                                         <div class="{{randColor()}}"></div>
                                         <a href="javascript:;"></a>{{$vo->id}}
                                     </td>
-                                    <td class="hidden-xs"> {{$vo->title}}</td>
+                                    <td class="hidden-xs"><a href="{{route('articleDetail',['aid' => $vo->url])}}" target="_blank">{{$vo->title}}</a></td>
                                     <td>@if(empty($vo->subhead))-@else{{$vo->subhead}}@endif</td>
+                                    <td>@if(empty($vo->tags))
+                                            -
+                                        @else
+                                            @foreach($vo->tags as $tag)
+                                                <a href="{{route('tag',['tagUrl' => $tag->name])}}" target="_blank">{{$tag->name}}</a>,
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>@if(!empty($vo->img_url))<img src="{{asset(env('RESOURCE_URL_PREFIX').$vo->img_url)}}" width="120" height="80">@else - @endif</td>
                                     <td> {!! getStatus($vo->status) !!}</td>
                                     <td> {{$vo->created_at}}</td>

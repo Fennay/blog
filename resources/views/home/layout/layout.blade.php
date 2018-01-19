@@ -96,7 +96,7 @@
 <script type="text/javascript" src="/resources/home/js/tag_cloud.js"></script>
 
 @yield('page_js')
-@if(config('app.debug') == false)
+@if(false == config('app.debug'))
 <script>
     var _hmt = _hmt || [];
     (function () {

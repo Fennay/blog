@@ -16,7 +16,7 @@
 		</div>
 		<div id="disqus_thread" style="margin: 100px 0 0 0"></div>
 	</div>
-	@if(true == config('app.debug'))
+	@if(false == config('app.debug	'))
 	<script>
         /**
          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
