@@ -38,7 +38,10 @@ class ArticleController extends BaseController
     public function index()
     {
         $dataList = $this->articleObj->getAdminArticlePageList();
-
+        // \DB::enableQueryLog();
+        $tagsList = $this->articleObj->getTagsListWith1Status();
+        // $sql = \DB::getQueryLog();
+        // dd($sql,$tagsList);
         return view('admin.article.index', ['dataList' => $dataList]);
     }
 
