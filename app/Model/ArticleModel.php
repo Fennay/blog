@@ -33,6 +33,7 @@ class ArticleModel extends Eloquent
         $this->clearKeys = [
             'get_index_article_detail_by_article_url_*',
             'get_article_list_group_by_date_*',
+            'get_tags_list_with_1_status_size_*'
         ];
     }
 

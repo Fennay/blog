@@ -23,7 +23,9 @@ class ArticleTagsModel extends Eloquent
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->clearKeys = [];
+        $this->clearKeys = [
+            'get_tags_list_with_1_status_size_*'
+        ];
     }
 
 }
