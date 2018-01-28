@@ -1,3 +1,4 @@
+
 <div class="col-sm-3">
 	<div class="human-time">
 		<object width="210" height="90" align="middle">
@@ -7,7 +8,7 @@
 			<param name="bgcolor" value="#ffffff"/>
 			<param name="wmode" value="transparent"/>
 			<embed wmode="transparent" src="/resources/home/flash/honehone_clock_wh.swf" quality="high"
-				   allowScriptAccess="always" type="application/x-shockwave-flash"/>
+				   allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 		</object>
 	</div>
 
