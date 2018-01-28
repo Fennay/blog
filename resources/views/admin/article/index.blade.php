@@ -51,7 +51,7 @@
                             @foreach($dataList as $vo)
                                 <tr>
                                     <td class="highlight">
-                                        <div class="{{randColor()}}"></div>
+                                        <div class="{{randCssClass()}}"></div>
                                         <a href="javascript:;"></a>{{$vo->id}}
                                     </td>
                                     <td class="hidden-xs"><a href="{{route('articleDetail',['aid' => $vo->url])}}" target="_blank">{{$vo->title}}</a></td>
