@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        $this->setupLinker();
     }
 
     /**
@@ -39,5 +40,18 @@ class AppServiceProvider extends ServiceProvider
                 env('BAIDU_FANYI_URL')
             );
         });
+    }
+
+    /**
+     * 配置Linker
+     *
+     * @param Linker $linker
+     */
+    protected function setupLinker(Linker $linker)
+    {
+        $resourceUrlPrefix = env('RESOURCE_URL_PREFIX');
+        if ($resourceUrlPrefix == '') throw new \RuntimeException('请配置RESOURCE_URL_PREFIX');
+
+        $linker->set('resource', $resourceUrlPrefix);
     }
 }
