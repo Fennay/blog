@@ -6,6 +6,7 @@ use App\Services\BaiDuFanYiService;
 use App\Services\UploadService;
 use Illuminate\Support\ServiceProvider;
 use Schema;
+use App\Services\Linker;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,10 +14,10 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      * @return void
      */
-    public function boot()
+    public function boot(Linker $linker)
     {
         Schema::defaultStringLength(191);
-        $this->setupLinker();
+        $this->setupLinker($linker);
     }
 
     /**
