@@ -6,6 +6,8 @@
 <meta name="description" content="{{$articleInfo->title}}">
 @endsection
 @section('page_css')
+<!-- markdown样式 -->
+<link rel="stylesheet" href="/resources/home/css/markdown.css" type="text/css" />
 <link rel="stylesheet" href="/resources/home/css/detail.css">
 @endsection
 @section('main')
