@@ -113,6 +113,8 @@ class ArticleController extends BaseController
      * 保存
      * @param ArticleRequest $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\BusinessException
+     * @throws \App\Exceptions\UploadException
      * @author: Mikey
      */
     public function save(ArticleRequest $request)
