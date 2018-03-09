@@ -14,7 +14,7 @@
     <!-- 引入页面css -->
     @yield('page_css')
     <!-- markdown样式 -->
-    <link rel="stylesheet" href="/resources/home/css/github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/home/css/markdown.css" type="text/css" />
 
     <!-- 代码高亮插件 -->
     <script type="text/javascript" src="/resources/plugins/syntaxHighlighter/scripts/shCore.js"></script>
