@@ -28,7 +28,8 @@ class ArticleRepository extends BaseRepository
         ArticleContentModel $articleContent,
         ArticleTagsModel $articleTagsModel,
         BaiDuFanYiService $baiDuFanYiService
-    ) {
+    )
+    {
         $this->articleModel = $article;
         $this->articleContentModel = $articleContent;
         $this->articleTagsModel = $articleTagsModel;
@@ -69,7 +70,7 @@ class ArticleRepository extends BaseRepository
         // 存储文章基本内容
         try {
             $saveInfo = [
-                'id'        => empty($data['id']) ? '' : $data['id'],
+                'id'        => empty($data['id']) ? null : $data['id'],
                 'title'     => $data['title'],
                 'subhead'   => empty($data['subhead']) ? '' : $data['subhead'],
                 'url'       => empty($data['url']) ? '' : $data['url'],
@@ -100,7 +101,7 @@ class ArticleRepository extends BaseRepository
         // 保存内容
         try {
             $saveContent = [
-                'id'      => empty($data['content_id']) ? '' : $data['content_id'],
+                'id'      => empty($data['content_id']) ? null : $data['content_id'],
                 'aid'     => $aid,
                 'content' => empty($data['content']) ? '' : $data['content']
             ];
@@ -185,7 +186,8 @@ class ArticleRepository extends BaseRepository
             'sort' => 'desc',
             'id'   => 'desc'
         ]
-    ) {
+    )
+    {
         $dataList = $this->articleModel->getPageList(['status' => 1], $pageSize, $order);
         $dataList = $this->setArticleTagsInfo($dataList);
 
@@ -323,6 +325,7 @@ class ArticleRepository extends BaseRepository
     public function saveTag($data)
     {
         $saveData = [
+            'id'     => empty($data['name']) ? null : $data['name'],
             'name'   => empty($data['name']) ? '' : $data['name'],
             'url'    => empty($data['url']) ? $data['name'] : $data['url'],
             'status' => empty($data['status']) ? 0 : $data['status'],
@@ -351,13 +354,13 @@ class ArticleRepository extends BaseRepository
             } catch (BusinessException $e) {
                 $url = '';
             }
-
             $tmpData = [
                 'name' => $v,
                 'url'  => empty($url) ? $v : $url
             ];
-            $this->articleTagsModel->saveInfo($tmpData);
-            $rs[] = $this->articleTagsModel->id;
+            $rs[] = $this->articleTagsModel->insertGetId($tmpData);
+            //$rs[] = $this->articleTagsModel->id;
+            unset($tmpData);
         }
 
         return $rs;
