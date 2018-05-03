@@ -33,6 +33,17 @@
     <link href='/resources/plugins/calendar/css/calendar.css' rel='stylesheet'/>
 
     <link rel="shortcut icon" href="/ico.png"/>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?62a2c2229bec8b9dd82b26813fef8aa0";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
 </head>
 <body>
 
