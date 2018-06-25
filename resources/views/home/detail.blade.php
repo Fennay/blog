@@ -7,13 +7,13 @@
 @endsection
 @section('page_css')
 <!-- markdown样式 -->
-<link rel="stylesheet" href="/resources/home/css/markdown.css" type="text/css" />
+<link rel="stylesheet" href="/resources/home/css/markdown2.css" type="text/css" />
 <link rel="stylesheet" href="/resources/home/css/detail.css">
 @endsection
 @section('main')
 	<div class="col-sm-9 ">
 		<h1 class="title">{{$articleInfo->title}}</h1>
-		<div class="" id="content">
+		<div class="markdown-body" id="content">
 			{!! $articleInfo->content->content !!}
 		</div>
 		<div id="disqus_thread" style="margin: 100px 0 0 0"></div>

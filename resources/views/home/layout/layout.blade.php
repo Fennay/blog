@@ -6,13 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     @yield('seo')
-
-            <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-    <link rel="stylesheet" href="/resources/home/css/markdown2.css">
     <!-- 引入页面css -->
     @yield('page_css')
 
@@ -61,7 +58,7 @@
             </ul>
         </div>
     </div>
-    <div class="row markdown-body">
+    <div class="row">
         @include('home.layout.sidebar')
 
         @yield('main')
