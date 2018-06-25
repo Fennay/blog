@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" href="/resources/home/css/markdown2.css">
     <!-- 引入页面css -->
     @yield('page_css')
 
@@ -59,7 +61,7 @@
             </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row markdown-body">
         @include('home.layout.sidebar')
 
         @yield('main')
