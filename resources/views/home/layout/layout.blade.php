@@ -31,7 +31,7 @@
     {{--日历插件--}}
     <link href='/resources/plugins/calendar/css/calendar.css' rel='stylesheet'/>
 
-    <link rel="shortcut icon" href="/ico.png"/>
+    <link rel="shortcut icon" href="/resources/home/images/m.jpg"/>
 
     <script>
         var _hmt = _hmt || [];
