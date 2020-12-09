@@ -271,7 +271,7 @@ class ArticleRepository extends BaseRepository
      */
     public function setArticleTagsInfo($data)
     {
-        if (empty($data)) {
+        if ($data->isEmpty()) {
             return collect();
         }
 

@@ -6,6 +6,7 @@ use App\Traits\CommonResponse;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -33,7 +34,7 @@ class Handler extends ExceptionHandler
      * @param  \Exception $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -44,7 +45,7 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
      * @author: Mikey
      */
-    public function render($request, Exception $e)
+    public function render($request, Throwable $e)
     {
         if ($e instanceof HomeException || $e instanceof BusinessException) {
             return $this->renderShowableException($request, $e);
